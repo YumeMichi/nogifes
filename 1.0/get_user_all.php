@@ -9,7 +9,6 @@ if (!isset($iv) || $iv == '') {
     header('HTTP/1.1 500 Internal Server Error');
 }
 
-// $data = file_get_contents('response/get_user_all.json');
 $data = json_decode(file_get_contents('response/get_user_all.json'), true);
 $unitData = $data['unit_data'];
 
@@ -17,10 +16,6 @@ $userUnitId = 10000000;
 $movieList = [];
 $allData = json_decode(file_get_contents('masterdata/UnitMaster.json'), true);
 foreach ($allData as $kk => $value) {
-    if ($value['girl_id1'] != '116' && $value['girl_id1'] != '109') {
-        continue;
-    }
-
     $userUnitId++;
     $unitData[] = [
         'unit_structure' => [
@@ -28,14 +23,14 @@ foreach ($allData as $kk => $value) {
             'unit_id' => $value['unit_id'],
             'rarity' => $value['rarity'],
             'attribute' => $value['attribute'],
-            'exceed_count' => 0,
-            'level' => 1,
+            'exceed_count' => 5,
+            'level' => GetUnitLevel($value['rarity']),
             'exp' => 0,
             'hp' => $value['max_hp'],
             'gp' => $value['max_gp'],
             'skill_level' => 1,
-            'favorite' => 0,
-            'protect' => 0,
+            'favorite' => 1,
+            'protect' => 1,
             'supporter_data' => [],
             'image_type' => 0,
             'image_id' => 0,

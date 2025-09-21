@@ -40,3 +40,18 @@ function GetApiKey($name)
     $keyList = json_decode(file_get_contents("rijndael_keys.json"), true);
     return $keyList[$name];
 }
+
+function GetUnitLevel($rarity)
+{
+    $levelMap = [
+        '1' => '20',
+        '2' => '40',
+        '3' => '60',
+        '4' => '70',
+        '5' => '80',
+        '6' => '90',
+        '7' => '80',
+        '8' => '90'
+    ];
+    return $levelMap[$rarity] ?? 0;
+}
