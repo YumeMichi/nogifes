@@ -1,0 +1,3 @@
+[submodule "1.0/masterdata"]
+	path = 1.0/masterdata
+	url = https://github.com/YumeMichi/nogifes_master_db_diff

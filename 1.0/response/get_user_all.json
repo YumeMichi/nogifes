@@ -1,0 +1,282 @@
+{
+    "mstlist_version": 333,
+    "connect_key": "kncBcsBhF8kko4Gw",
+    "user_game_structure": {
+        "user_id": 20307646,
+        "nickname": "asas",
+        "level": 1,
+        "exp": 0,
+        "gold": 0,
+        "medal": 0,
+        "paid_diamond": 0,
+        "free_diamond": 0,
+        "nz_point": 0,
+        "live_point": 0,
+        "now_lp": 27,
+        "max_lp": 27,
+        "lp_recover_date": 1757521500,
+        "introduction": "\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "unit_max_num": 99999,
+        "unit_holder_max_num": 1,
+        "deck_max_num": 8,
+        "follow_max_num": 4,
+        "follow_diamond_max_num": 0,
+        "friend_id": "562581396",
+        "deck_data": [
+            {
+                "attribute": 1,
+                "deck_id": 1
+            },
+            {
+                "attribute": 2,
+                "deck_id": 1
+            },
+            {
+                "attribute": 3,
+                "deck_id": 1
+            }
+        ],
+        "favorite_user_unit_id": 8012058,
+        "favorite_unit_id": 64770,
+        "push_girl_id": 116,
+        "push_girl_costume_id": 0,
+        "support_unit_data": [
+            {
+                "attribute": 1,
+                "unit_data": [
+                    {
+                        "order": 1,
+                        "support_user_unit_id": 8012058,
+                        "support_unit_id": 64770
+                    }
+                ]
+            },
+            {
+                "attribute": 2,
+                "unit_data": [
+                    {
+                        "order": 1,
+                        "support_user_unit_id": 8012058,
+                        "support_unit_id": 64770
+                    }
+                ]
+            },
+            {
+                "attribute": 3,
+                "unit_data": [
+                    {
+                        "order": 1,
+                        "support_user_unit_id": 8012058,
+                        "support_unit_id": 64770
+                    }
+                ]
+            }
+        ],
+        "last_exchange_date": 0,
+        "isky": false,
+        "isky_id": 0,
+        "inherit": false,
+        "inherit_id": "",
+        "rating_point": 0,
+        "rating_data": [
+            {
+                "attribute": 1,
+                "live_data": []
+            },
+            {
+                "attribute": 2,
+                "live_data": []
+            },
+            {
+                "attribute": 3,
+                "live_data": []
+            }
+        ],
+        "title_data": [
+            {
+                "order": 1,
+                "title_structure": {
+                    "title_id": 1,
+                    "title_value": "",
+                    "title_expire": 0
+                }
+            },
+            {
+                "order": 2,
+                "title_structure": {
+                    "title_id": 0,
+                    "title_value": "",
+                    "title_expire": 0
+                }
+            }
+        ],
+        "high_quality_movie_key": 0,
+        "continuation_pack": false,
+        "continuation_pack_expire": 0,
+        "advertisement_data": [
+            {
+                "recover_lp_count": 0,
+                "last_do_date": 0
+            }
+        ]
+    },
+    "unit_data": [
+        {
+            "unit_structure": {
+                "user_unit_id": 8012058,
+                "unit_id": 64770,
+                "rarity": 2,
+                "attribute": 1,
+                "exceed_count": 0,
+                "level": 1,
+                "exp": 0,
+                "hp": 164,
+                "gp": 2185,
+                "skill_level": 1,
+                "favorite": 1,
+                "protect": 0,
+                "supporter_data": [
+                    {
+                        "attribute": 1
+                    },
+                    {
+                        "attribute": 2
+                    },
+                    {
+                        "attribute": 3
+                    }
+                ],
+                "image_type": 0,
+                "image_id": 0
+            }
+        },
+        {
+            "unit_structure": {
+                "user_unit_id": 8012061,
+                "unit_id": 65370,
+                "rarity": 1,
+                "attribute": 1,
+                "exceed_count": 0,
+                "level": 1,
+                "exp": 0,
+                "hp": 126,
+                "gp": 1073,
+                "skill_level": 1,
+                "favorite": 0,
+                "protect": 0,
+                "supporter_data": [],
+                "image_type": 0,
+                "image_id": 0
+            }
+        },
+        {
+            "unit_structure": {
+                "user_unit_id": 8012060,
+                "unit_id": 65380,
+                "rarity": 1,
+                "attribute": 3,
+                "exceed_count": 0,
+                "level": 1,
+                "exp": 0,
+                "hp": 127,
+                "gp": 1072,
+                "skill_level": 1,
+                "favorite": 0,
+                "protect": 0,
+                "supporter_data": [],
+                "image_type": 0,
+                "image_id": 0
+            }
+        },
+        {
+            "unit_structure": {
+                "user_unit_id": 8012059,
+                "unit_id": 65390,
+                "rarity": 1,
+                "attribute": 2,
+                "exceed_count": 0,
+                "level": 1,
+                "exp": 0,
+                "hp": 126,
+                "gp": 1072,
+                "skill_level": 1,
+                "favorite": 0,
+                "protect": 0,
+                "supporter_data": [],
+                "image_type": 0,
+                "image_id": 0
+            }
+        },
+        {
+            "unit_structure": {
+                "user_unit_id": 8012062,
+                "unit_id": 116520,
+                "rarity": 1,
+                "attribute": 1,
+                "exceed_count": 0,
+                "level": 1,
+                "exp": 0,
+                "hp": 129,
+                "gp": 1112,
+                "skill_level": 1,
+                "favorite": 0,
+                "protect": 0,
+                "supporter_data": [],
+                "image_type": 0,
+                "image_id": 0
+            }
+        }
+    ],
+    "deck_data": [
+        {
+            "deck_structure": {
+                "deck_id": 1,
+                "deck_name": "\u30d5\u30a9\u30fc\u30e1\u30fc\u30b7\u30e7\u30f31",
+                "total_hp": 672,
+                "total_gp": 6514,
+                "member_data": [
+                    {
+                        "user_unit_id": 8012058,
+                        "unit_id": 64770,
+                        "member_type": 1,
+                        "disp_order": 3
+                    },
+                    {
+                        "user_unit_id": 8012059,
+                        "unit_id": 65390,
+                        "member_type": 2,
+                        "disp_order": 1
+                    },
+                    {
+                        "user_unit_id": 8012060,
+                        "unit_id": 65380,
+                        "member_type": 2,
+                        "disp_order": 2
+                    },
+                    {
+                        "user_unit_id": 8012061,
+                        "unit_id": 65370,
+                        "member_type": 2,
+                        "disp_order": 4
+                    },
+                    {
+                        "user_unit_id": 8012062,
+                        "unit_id": 116520,
+                        "member_type": 2,
+                        "disp_order": 5
+                    }
+                ]
+            }
+        }
+    ],
+    "mix_material_data": [],
+    "evo_material_data": [],
+    "exceed_material_data": [],
+    "item_data": [],
+    "piece_data": [],
+    "grow_item_data": [],
+    "gacha_ticket_data": [],
+    "unit_exchange_ticket_data": [],
+    "follow_num": 0,
+    "success": true
+}

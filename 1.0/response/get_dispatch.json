@@ -1,0 +1,117 @@
+{
+    "mstlist_version": 333,
+    "connect_key": "pqDWpWKKxveBSHtW",
+    "gold_update_count": 0,
+    "dispatch_data": [
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 16102,
+            "location": 26,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 17502,
+            "location": 10,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 17103,
+            "location": 28,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 13412,
+            "location": 11,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 13515,
+            "location": 22,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 15003,
+            "location": 29,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 16110,
+            "location": 7,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 16305,
+            "location": 1,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 14417,
+            "location": 6,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 14524,
+            "location": 17,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 13206,
+            "location": 16,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        },
+        {
+            "dispatch_no": 0,
+            "dispatch_stage_id": 15106,
+            "location": 27,
+            "status": 0,
+            "end_date": 0,
+            "encore_appear_id": 0,
+            "event_id": 0
+        }
+    ],
+    "lots_date": 1758170227,
+    "success": true
+}

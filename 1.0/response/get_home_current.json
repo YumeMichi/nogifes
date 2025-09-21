@@ -1,0 +1,19 @@
+{
+    "mstlist_version": 333,
+    "connect_key": "b7MOkmpiU66ijzil",
+    "home_mode": 1,
+    "standing_set_id": 1,
+    "standing_set_data": [
+        {
+            "set_id": 1,
+            "girl_id": 504,
+            "home_costume_id": 10060504,
+            "home_bg_id": 1
+        }
+    ],
+    "photo_set_id": 0,
+    "photo_set_data": [],
+    "unit_movie_set_id": 0,
+    "unit_movie_set_data": [],
+    "success": true
+}
