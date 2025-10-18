@@ -60,4 +60,28 @@ function UpdateAllMovie()
     file_put_contents("response/get_all_movie.json", json_encode($response));
 }
 
+function UpdateAllLive()
+{
+    $liveList = [];
+
+    // get_live_lite
+    $response = json_decode(file_get_contents("response/get_live_lite.json"), true);
+
+    // live_data
+    $liveData = json_decode(file_get_contents("masterdata/LiveMaster.json"), true);
+    foreach ($liveData as $live) {
+        if ($live['unconditional'] == '1') {
+            continue;
+        }
+        $liveList[] = [
+            'live_id' => $live['live_id'],
+        ];
+    }
+
+    // get_live_lite
+    $response['live_data'] = $liveList;
+    file_put_contents("response/get_live_lite.json", json_encode($response));
+}
+
 UpdateAllMovie();
+UpdateAllLive();

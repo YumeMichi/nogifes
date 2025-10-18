@@ -47,6 +47,4 @@ foreach ($allData as $kk => $value) {
 
 $data['unit_data'] = $unitData;
 $newData = json_encode($data);
-file_put_contents("response/temp/user_card.json", $newData);
-file_put_contents("response/temp/bonus_movie.json", json_encode($movieList));
 echo RijndaelEncrypt($key, $iv, $newData);
