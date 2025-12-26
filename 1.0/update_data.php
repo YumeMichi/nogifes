@@ -57,7 +57,8 @@ function UpdateAllMovie()
     // get_all_movie
     $response['bonus_movie_data'] = $bonusMovieData;
     $response['high_quality_movie_data'] = $highQualityMovieData;
-    file_put_contents("response/get_all_movie.json", json_encode($response));
+    // echo json_encode($response, JSON_PRETTY_PRINT);
+    file_put_contents("response/get_all_movie.json", json_encode($response, JSON_PRETTY_PRINT));
 }
 
 function UpdateAllLive()
@@ -80,7 +81,8 @@ function UpdateAllLive()
 
     // get_live_lite
     $response['live_data'] = $liveList;
-    file_put_contents("response/get_live_lite.json", json_encode($response));
+    echo json_encode($response, JSON_PRETTY_PRINT);
+    file_put_contents("response/get_live_lite.json", json_encode($response, JSON_PRETTY_PRINT));
 }
 
 UpdateAllMovie();
