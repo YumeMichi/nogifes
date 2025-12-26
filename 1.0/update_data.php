@@ -81,7 +81,7 @@ function UpdateAllLive()
 
     // get_live_lite
     $response['live_data'] = $liveList;
-    echo json_encode($response, JSON_PRETTY_PRINT);
+    // echo json_encode($response, JSON_PRETTY_PRINT);
     file_put_contents("response/get_live_lite.json", json_encode($response, JSON_PRETTY_PRINT));
 }
 
