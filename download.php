@@ -42,13 +42,12 @@ if ($masterDataVersion != $ret['mstlist_version']) {
     file_put_contents("mstlist_version.txt", $ret['mstlist_version']);
 } else {
     echo "Current master data version: " . $masterDataVersion . PHP_EOL;
+    die;
 }
 
 if (!file_exists('temp')) {
     mkdir('temp', 0755, true);
 }
-
-$keyMap = json_decode(file_get_contents("./1.0/rijndael_keys.json"), true);
 
 $mstList = json_decode(file_get_contents("mstlist.json"), true);
 foreach ($mstList['mstlist'] as $mst) {
@@ -79,6 +78,7 @@ foreach ($mstList['mstlist'] as $mst) {
         }
     }
 
+    $keyMap = json_decode(file_get_contents("./1.0/rijndael_keys.json"), true);
     $fileKey = $keyMap[$fileName];
     $fileDecrypted = RijndaelDecryptECB($fileKey, $fileContent);
     $fileEncoded = json_encode(
