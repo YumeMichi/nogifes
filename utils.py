@@ -42,7 +42,7 @@ def sanitize_filename(title: str) -> str:
     return name or "untitled"
 
 def download(url: str, file_name: str) -> bool:
-    print(f"Downloading {file_name}...")
+    # print(f"Downloading {file_name}...")
     try:
         response = requests.get(url, stream=True)
         response.raise_for_status()
@@ -58,7 +58,7 @@ def download(url: str, file_name: str) -> bool:
             unit="B",
             unit_scale=True,
             unit_divisor=1024,
-            desc=file_name,
+            desc=file_name.ljust(32),
         ) as progress:
             for chunk in response.iter_content(chunk_size=8192):
                 if chunk:

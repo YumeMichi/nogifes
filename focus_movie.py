@@ -24,16 +24,16 @@ def download_focus_movie(girl_id: int):
                 movie_file_name = f"focus_data_high_{movie_data["focus_movie_id"]:05d}.cpk"
                 movie_url = f"{RESOURCE_PATH['high_focus_movie']}{movie_file_name}"
 
-            movie = {
-                "movie_id": movie_data["focus_movie_id"],
-                "movie_name": movie_name,
-                "movie_url": movie_url,
-                "movie_file_name": movie_file_name,
-                "movie_save_name": movie_save_name,
-                "movie_save_path": movie_save_path,
-                "high_quality": movie_data["high_quality"]
-            }
-            print(movie)
+            # movie = {
+            #     "movie_id": movie_data["focus_movie_id"],
+            #     "movie_name": movie_name,
+            #     "movie_url": movie_url,
+            #     "movie_file_name": movie_file_name,
+            #     "movie_save_name": movie_save_name,
+            #     "movie_save_path": movie_save_path,
+            #     "high_quality": movie_data["high_quality"]
+            # }
+            # print(movie)
 
             if os.path.exists(movie_save_path):
                 print(f"{movie_save_name} already exists")
@@ -85,15 +85,15 @@ def download_reward_focus_movie(girl_id: int):
             movie_save_name = f"{sanitize_filename(movie_name)}.mp4"
             movie_save_path = f"{DOWNLOAD_PATH["reward_movie"]}{girl_data["girl_name"]}/{movie_save_name}"
 
-            movie = {
-                "movie_id": movie_data["reward_movie_id"],
-                "movie_name": movie_name,
-                "movie_url": movie_url,
-                "movie_file_name": movie_file_name,
-                "movie_save_name": movie_save_name,
-                "movie_save_path": movie_save_path
-            }
-            print(movie)
+            # movie = {
+            #     "movie_id": movie_data["reward_movie_id"],
+            #     "movie_name": movie_name,
+            #     "movie_url": movie_url,
+            #     "movie_file_name": movie_file_name,
+            #     "movie_save_name": movie_save_name,
+            #     "movie_save_path": movie_save_path
+            # }
+            # print(movie)
 
             if os.path.exists(movie_save_path):
                 print(f"{movie_save_name} already exists")

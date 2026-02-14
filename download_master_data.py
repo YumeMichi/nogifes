@@ -6,6 +6,7 @@ import secrets
 
 from pathlib import Path
 from py3rijndael import Rijndael
+from utils import download
 
 APPLICATION_VERSION = 21401
 STORE_ID = 2  # Android
@@ -188,13 +189,11 @@ def download_master_data() -> None:
                 continue
 
         url = f"https://v2static.nogifes.jp/resource/mst/{mst['file']}?ver={mst['version']}"
-        print(f"Downloading {url}")
+        # print(f"Downloading {url}")
 
         for i in range(3):
             try:
-                response = requests.get(url)
-                response.raise_for_status()
-                temp_path.write_bytes(response.content)
+                download(url, file_name)
                 break
             except Exception:
                 print(f"[{i+1}/3] Failed to download {mst['name']}")
@@ -202,7 +201,7 @@ def download_master_data() -> None:
                     raise
 
         file_key = key_map[file_name]
-        decrypted = rj256_decrypt_ecb(file_key, response.content)
+        decrypted = rj256_decrypt_ecb(file_key, Path(f"{temp_dir}/{file_name}").read_bytes())
 
         pretty = json.dumps(
             json.loads(decrypted),
