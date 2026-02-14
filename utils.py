@@ -10,12 +10,14 @@ KEY = 0x0013F11BC5510101
 
 RESOURCE_PATH = {
     "focus_movie": "https://v2static.nogifes.jp/resource/Movie/Focus/",
-    "high_focus_movie": "https://v2static.nogifes.jp/resource/Movie/HighFocusMovie/"
+    "high_focus_movie": "https://v2static.nogifes.jp/resource/Movie/HighFocusMovie/",
+    "reward_movie": "https://v2static.nogifes.jp/resource/Movie/Reward/"
 }
 
 DOWNLOAD_PATH = {
-    "focus_movie": "downloads/focus_movie/",
-    "high_focus_movie": "downloads/high_focus_movie/"
+    "focus_movie": "/mnt/data/downloads/nogifes/focus_movie/",
+    "high_focus_movie": "/mnt/data/downloads/nogifes/high_focus_movie/",
+    "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/"
 }
 
 FILENAME_REPLACEMENTS = {

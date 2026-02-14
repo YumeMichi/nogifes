@@ -48,7 +48,17 @@ def get_focus_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
 
     return None
 
-# ================ GirlMaster ================
+# ================ RewardMovieMaster ================
+def get_reward_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
+    data = load_master_data("RewardMovieMaster")
+
+    for item in data:
+        for unit in item["unit_data"]:
+            if unit["unit_id"] == unit_id:
+                return item
+
+    return None
+
 # ================ GirlMaster ================
 # ================ GirlMaster ================
 # ================ GirlMaster ================
