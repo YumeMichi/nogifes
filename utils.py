@@ -1,3 +1,4 @@
+import datetime
 import os
 import re
 import requests
@@ -122,7 +123,7 @@ def extract_unity_assets(file_path: str) -> list[str]:
             img = data.image
             img.save(dest)
 
-            file_list.append(data.m_Name + ".png")
+            file_list.append(dest)
 
     return file_list
 
@@ -172,3 +173,10 @@ def remux_video(video_path: str, audio_path: str, output_path: str) -> bool:
         return False
 
     return True
+
+def write_complete(dir_path: str) -> None:
+    with open(os.path.join(dir_path, ".complete"), "w") as f:
+        f.write(f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}\n")
+
+def check_complete(dir_path: str) -> bool:
+    return os.path.exists(os.path.join(dir_path, ".complete"))

@@ -37,25 +37,22 @@ def download_member_card():
         if not os.path.exists(card_save_path):
             os.makedirs(card_save_path, exist_ok=True)
 
-        if not os.path.exists(os.path.join(card_save_path, "card_m.png")):
+        if not check_complete(card_save_path):
+            if os.path.exists(card_save_path):
+                shutil.rmtree(card_save_path)
+            os.makedirs(card_save_path, exist_ok=True)
+
             if download(card_url, card_file_name):
                 for file_name in extract_unity_assets(card_path):
-                    if os.path.exists(os.path.join(card_save_path, file_name)):
-                        os.remove(os.path.join(TEMP_DIR, file_name))
-                        continue
-                    if os.path.exists(os.path.join(TEMP_DIR, file_name)):
-                        shutil.move(os.path.join(TEMP_DIR, file_name), card_save_path)
+                    shutil.move(file_name, card_save_path)
                 os.remove(card_path)
 
-        if not os.path.exists(os.path.join(card_save_path, "card_l.png")):
             if download(card_l_url, card_l_file_name):
                 for file_name in extract_unity_assets(card_l_path):
-                    if os.path.exists(os.path.join(card_save_path, file_name)):
-                        os.remove(os.path.join(TEMP_DIR, file_name))
-                        continue
-                    if os.path.exists(os.path.join(TEMP_DIR, file_name)):
-                        shutil.move(os.path.join(TEMP_DIR, file_name), card_save_path)
+                    shutil.move(file_name, card_save_path)
                 os.remove(card_l_path)
+
+            write_complete(card_save_path)
 
 if __name__ == '__main__':
     download_member_card()

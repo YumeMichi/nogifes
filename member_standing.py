@@ -30,17 +30,16 @@ def download_member_standing():
                         if os.path.exists(standing_path):
                             os.remove(standing_path)
 
-                        if not os.path.exists(standing_save_path):
+                        if not check_complete(standing_save_path):
+                            if os.path.exists(standing_save_path):
+                                shutil.rmtree(standing_save_path)
                             os.makedirs(standing_save_path, exist_ok=True)
 
-                        if download(standing_url, standing_file_name):
-                            for file_name in extract_unity_assets(standing_path):
-                                if os.path.exists(os.path.join(standing_save_path, file_name)):
-                                    os.remove(os.path.join(TEMP_DIR, file_name))
-                                    continue
-                                if os.path.exists(os.path.join(TEMP_DIR, file_name)):
-                                    shutil.move(os.path.join(TEMP_DIR, file_name), standing_save_path)
-                            os.remove(standing_path)
+                            if download(standing_url, standing_file_name):
+                                for file_name in extract_unity_assets(standing_path):
+                                    shutil.move(file_name, standing_save_path)
+                                os.remove(standing_path)
+                                write_complete(standing_save_path)
 
 if __name__ == "__main__":
     download_member_standing()
