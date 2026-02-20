@@ -3,18 +3,21 @@ import re
 import requests
 import subprocess
 import tqdm
+import UnityPy
 
 from PyCriCodecs import ACB, CPK, USM
 
 KEY = 0x0013F11BC5510101
 
 RESOURCE_PATH = {
+    "asset_bundle": "https://v2static.nogifes.jp/resource/Android_2017_4_1f1/",
     "focus_movie": "https://v2static.nogifes.jp/resource/Movie/Focus/",
     "high_focus_movie": "https://v2static.nogifes.jp/resource/Movie/HighFocusMovie/",
     "reward_movie": "https://v2static.nogifes.jp/resource/Movie/Reward/"
 }
 
 DOWNLOAD_PATH = {
+    "member_card": "/mnt/data/downloads/nogifes/member_card/",
     "focus_movie": "/mnt/data/downloads/nogifes/focus_movie/",
     "high_focus_movie": "/mnt/data/downloads/nogifes/high_focus_movie/",
     "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/"
@@ -102,6 +105,19 @@ def extract_acb(file_path: str) -> bool:
         return False
 
     return True
+
+def extract_unity_assets(file_path: str):
+    env = UnityPy.load(file_path)
+    for obj in env.objects:
+        if obj.type.name == "Texture2D":
+            data = obj.parse_as_object()
+            dest = os.path.join(TEMP_DIR, data.m_Name)
+
+            dest, _ = os.path.splitext(dest)
+            dest = dest + ".png"
+
+            img = data.image
+            img.save(dest)
 
 def run_cmd(cmd: list[str], show_output: bool = True) -> str:
     process = subprocess.Popen(

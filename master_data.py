@@ -6,7 +6,6 @@ MASTER_DATA_PATH = "./1.0/masterdata/"
 
 # ================ Common ================
 def load_master_data(data_name: str) -> list[Any]:
-    data: list[Any] = []
     with open(MASTER_DATA_PATH + data_name + ".json") as f:
         data = json.load(f)
 
@@ -15,6 +14,14 @@ def load_master_data(data_name: str) -> list[Any]:
 # ================ GirlMaster ================
 def get_girl_list() -> list[Any]:
     return load_master_data("GirlMaster")
+
+def get_girl_map() -> dict[int, str]:
+    data = get_girl_list()
+    girl_map: dict[int, str] = {}
+    for item in data:
+        girl_map[item["girl_id"]] = item["girl_name"].replace(" ", "")
+
+    return girl_map
 
 def get_girl_by_girl_id(girl_id: int) -> dict[str, Any] | None:
     data = load_master_data("GirlMaster")
@@ -27,6 +34,9 @@ def get_girl_by_girl_id(girl_id: int) -> dict[str, Any] | None:
     return None
 
 # ================ UnitMaster ================
+def get_unit_list() -> list[Any]:
+    return load_master_data("UnitMaster")
+
 def get_unit_by_girl_id(girl_id: int) -> list[Any]:
     data = load_master_data("UnitMaster")
 
