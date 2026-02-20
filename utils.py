@@ -18,6 +18,7 @@ RESOURCE_PATH = {
 
 DOWNLOAD_PATH = {
     "member_card": "/mnt/data/downloads/nogifes/member_card/",
+    "member_standing": "/mnt/data/downloads/nogifes/member_standing/",
     "focus_movie": "/mnt/data/downloads/nogifes/focus_movie/",
     "high_focus_movie": "/mnt/data/downloads/nogifes/high_focus_movie/",
     "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/"
@@ -106,7 +107,9 @@ def extract_acb(file_path: str) -> bool:
 
     return True
 
-def extract_unity_assets(file_path: str):
+def extract_unity_assets(file_path: str) -> list[str]:
+    file_list: list[str] = []
+
     env = UnityPy.load(file_path)
     for obj in env.objects:
         if obj.type.name == "Texture2D":
@@ -118,6 +121,10 @@ def extract_unity_assets(file_path: str):
 
             img = data.image
             img.save(dest)
+
+            file_list.append(data.m_Name + ".png")
+
+    return file_list
 
 def run_cmd(cmd: list[str], show_output: bool = True) -> str:
     process = subprocess.Popen(

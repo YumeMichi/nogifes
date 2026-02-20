@@ -39,20 +39,22 @@ def download_member_card():
 
         if not os.path.exists(os.path.join(card_save_path, "card_m.png")):
             if download(card_url, card_file_name):
-                extract_unity_assets(card_path)
-                if os.path.exists(os.path.join(TEMP_DIR, "card_m.png")):
-                    shutil.move(os.path.join(TEMP_DIR, "card_m.png"), card_save_path)
-                if os.path.exists(os.path.join(TEMP_DIR, "card_s.png")):
-                    shutil.move(os.path.join(TEMP_DIR, "card_s.png"), card_save_path)
-                if os.path.exists(os.path.join(TEMP_DIR, "icon.png")):
-                    shutil.move(os.path.join(TEMP_DIR, "icon.png"), card_save_path)
+                for file_name in extract_unity_assets(card_path):
+                    if os.path.exists(os.path.join(card_save_path, file_name)):
+                        os.remove(os.path.join(TEMP_DIR, file_name))
+                        continue
+                    if os.path.exists(os.path.join(TEMP_DIR, file_name)):
+                        shutil.move(os.path.join(TEMP_DIR, file_name), card_save_path)
                 os.remove(card_path)
 
         if not os.path.exists(os.path.join(card_save_path, "card_l.png")):
             if download(card_l_url, card_l_file_name):
-                extract_unity_assets(card_l_path)
-                if os.path.exists(os.path.join(TEMP_DIR, "card_l.png")):
-                    shutil.move(os.path.join(TEMP_DIR, "card_l.png"), card_save_path)
+                for file_name in extract_unity_assets(card_l_path):
+                    if os.path.exists(os.path.join(card_save_path, file_name)):
+                        os.remove(os.path.join(TEMP_DIR, file_name))
+                        continue
+                    if os.path.exists(os.path.join(TEMP_DIR, file_name)):
+                        shutil.move(os.path.join(TEMP_DIR, file_name), card_save_path)
                 os.remove(card_l_path)
 
 if __name__ == '__main__':
