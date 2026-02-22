@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 import re
 import requests
@@ -174,7 +175,7 @@ def remux_video(video_path: str, audio_path: str, output_path: str) -> bool:
 
     return True
 
-def write_complete(dir_path: str) -> None:
+def write_complete(dir_path: str):
     with open(os.path.join(dir_path, ".complete"), "w") as f:
         f.write(f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}\n")
 

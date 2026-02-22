@@ -3,6 +3,9 @@ import shutil
 from master_data import *
 from utils import *
 
+FOCUS_MOVIE_DATA_PATH = "data/focus_movie.json"
+REWARD_MOVIE_DATA_PATH = "data/reward_movie.json"
+
 def download_focus_movie(girl_id: int):
     girl_data = get_girl_by_girl_id(girl_id)
     unit_data = get_unit_by_girl_id(girl_id)
@@ -24,16 +27,14 @@ def download_focus_movie(girl_id: int):
                 movie_file_name = f"focus_data_high_{movie_data["focus_movie_id"]:05d}.cpk"
                 movie_url = f"{RESOURCE_PATH['high_focus_movie']}{movie_file_name}"
 
-            # movie = {
-            #     "movie_id": movie_data["focus_movie_id"],
-            #     "movie_name": movie_name,
-            #     "movie_url": movie_url,
-            #     "movie_file_name": movie_file_name,
-            #     "movie_save_name": movie_save_name,
-            #     "movie_save_path": movie_save_path,
-            #     "high_quality": movie_data["high_quality"]
-            # }
-            # print(movie)
+            movie = {
+                "movie_id": movie_data["focus_movie_id"],
+                "movie_name": movie_data["focus_movie_name"],
+                "live_name": movie_data["live_name"],
+                "live_date": movie_data["live_date"],
+                "live_location": movie_data["live_location"],
+                "high_quality": movie_data["high_quality"]
+            }
 
             if os.path.exists(movie_save_path):
                 print(f"{movie_save_name} already exists")
@@ -56,6 +57,7 @@ def download_focus_movie(girl_id: int):
                             os.remove(audio_path)
                             os.remove(cpk_path)
                             shutil.rmtree(extracted_path)
+                            update_movie_data(FOCUS_MOVIE_DATA_PATH, movie)
                             print(f"Successfully extracted {movie_save_name}")
 
 def download_reward_focus_movie(girl_id: int):
@@ -85,15 +87,10 @@ def download_reward_focus_movie(girl_id: int):
             movie_save_name = f"{sanitize_filename(movie_name)}.mp4"
             movie_save_path = f"{DOWNLOAD_PATH["reward_movie"]}{girl_data["girl_name"]}/{movie_save_name}"
 
-            # movie = {
-            #     "movie_id": movie_data["reward_movie_id"],
-            #     "movie_name": movie_name,
-            #     "movie_url": movie_url,
-            #     "movie_file_name": movie_file_name,
-            #     "movie_save_name": movie_save_name,
-            #     "movie_save_path": movie_save_path
-            # }
-            # print(movie)
+            movie = {
+                "movie_id": movie_data["reward_movie_id"],
+                "movie_name": movie_data["reward_movie_name"],
+            }
 
             if os.path.exists(movie_save_path):
                 print(f"{movie_save_name} already exists")
@@ -113,7 +110,30 @@ def download_reward_focus_movie(girl_id: int):
                         os.remove(video_path)
                         os.remove(audio_path)
                         os.remove(usme_path)
+                        update_movie_data(REWARD_MOVIE_DATA_PATH, movie)
                         print(f"Successfully extracted {movie_save_name}")
+
+def update_movie_data(json_path: str, json_data: dict):
+    if os.path.exists(json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                data = []
+    else:
+        os.makedirs(os.path.dirname(json_path), exist_ok=True)
+        data = []
+
+    for i, item in enumerate(data):
+        if item["movie_id"] == json_data["movie_id"]:
+            data[i] = json_data
+            break
+    else:
+        data.append(json_data)
+
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+        f.write("\n")
 
 if __name__ == "__main__":
     girl_data = get_girl_list()
