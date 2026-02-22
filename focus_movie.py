@@ -33,7 +33,8 @@ def download_focus_movie(girl_id: int):
                 "live_name": movie_data["live_name"],
                 "live_date": movie_data["live_date"],
                 "live_location": movie_data["live_location"],
-                "high_quality": movie_data["high_quality"]
+                "high_quality": movie_data["high_quality"],
+                "girl_name": girl_data["girl_name"],
             }
 
             if os.path.exists(movie_save_path):
@@ -90,6 +91,7 @@ def download_reward_focus_movie(girl_id: int):
             movie = {
                 "movie_id": movie_data["reward_movie_id"],
                 "movie_name": movie_data["reward_movie_name"],
+                "girl_name": girl_data["girl_name"],
             }
 
             if os.path.exists(movie_save_path):
