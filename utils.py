@@ -1,5 +1,5 @@
 import datetime
-import json
+import jaconv
 import os
 import re
 import requests
@@ -181,3 +181,6 @@ def write_complete(dir_path: str):
 
 def check_complete(dir_path: str) -> bool:
     return os.path.exists(os.path.join(dir_path, ".complete"))
+
+def normalize_unicode(text: str) -> str:
+    return jaconv.h2z(text, kana=True, ascii=False, digit=False)
