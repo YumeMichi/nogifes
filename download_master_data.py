@@ -1,17 +1,20 @@
 import base64
+import crijndael
 import json
 import hashlib
 import requests
 import secrets
 
 from pathlib import Path
-from py3rijndael import Rijndael
 from utils import download
 
 APPLICATION_VERSION = 21401
 STORE_ID = 2  # Android
 
+KEY_SIZE = 24
 BLOCK_SIZE = 32
+CBC_MODE = 0
+ECB_MODE = 1
 
 def padding(data: bytes, block_size=BLOCK_SIZE) -> bytes:
     pad_len = block_size - (len(data) % block_size)
@@ -21,61 +24,47 @@ def unpadding(data: bytes) -> bytes:
     return data.rstrip(b'\x00')
 
 def rj256_encrypt_cbc(key_str: str, iv_str: str, plain_text: bytes | str) -> bytes:
-    key = key_str.encode()
-    iv = iv_str.encode()
-
     if isinstance(plain_text, str):
         plain_text = plain_text.encode("utf-8")
 
-    cipher = Rijndael(key, block_size=BLOCK_SIZE)
-    padded = padding(plain_text, BLOCK_SIZE)
+    return base64.b64encode(
+        crijndael.encrypt(
+            padding(plain_text, BLOCK_SIZE),
+            key_str.encode(),
+            iv_str.encode(),
+            BLOCK_SIZE * 8,
+            KEY_SIZE * 8,
+            CBC_MODE
+        )
+    )
 
-    encrypted = bytearray(len(padded))
-    prev = iv
+def rj256_decrypt_cbc(key_str: str, iv_str: str, b64_ciphertext: str) -> str:
+    return (
+        unpadding(
+            crijndael.decrypt(
+                base64.b64decode(b64_ciphertext),
+                key_str.encode(),
+                iv_str.encode(),
+                BLOCK_SIZE * 8,
+                KEY_SIZE * 8,
+                CBC_MODE
+            )
+        ).decode("utf-8")
+    )
 
-    for i in range(0, len(padded), BLOCK_SIZE):
-        block = padded[i:i+BLOCK_SIZE]
-        xored = bytearray(BLOCK_SIZE)
-        for j in range(BLOCK_SIZE):
-            xored[j] = block[j] ^ prev[j]
-
-        enc_block = cipher.encrypt(bytes(xored))
-        encrypted[i:i+BLOCK_SIZE] = enc_block
-        prev = enc_block
-
-    return base64.b64encode(encrypted)
-
-def rj256_decrypt_cbc(key_str: str, iv_str: str, b64_ciphertext: bytes | str) -> str:
-    key = key_str.encode()
-    iv = iv_str.encode()
-    ciphertext = base64.b64decode(b64_ciphertext)
-
-    cipher = Rijndael(key, block_size=BLOCK_SIZE)
-    decrypted = bytearray(len(ciphertext))
-    prev = iv
-
-    for i in range(0, len(ciphertext), BLOCK_SIZE):
-        block = ciphertext[i:i+BLOCK_SIZE]
-        dec_block = cipher.decrypt(block)
-        for j in range(BLOCK_SIZE):
-            decrypted[i+j] = dec_block[j] ^ prev[j]
-        prev = block
-
-    return unpadding(decrypted).decode('utf-8')
-
-def rj256_decrypt_ecb(key_str: str, b64_ciphertext: bytes | str) -> str:
-    key = key_str.encode()
-    ciphertext = base64.b64decode(b64_ciphertext)
-
-    cipher = Rijndael(key, block_size=BLOCK_SIZE)
-    decrypted = bytearray(len(ciphertext))
-
-    for i in range(0, len(ciphertext), BLOCK_SIZE):
-        block = ciphertext[i:i+BLOCK_SIZE]
-        dec_block = cipher.decrypt(block)
-        decrypted[i:i+BLOCK_SIZE] = dec_block
-
-    return unpadding(decrypted).decode("utf-8")
+def rj256_decrypt_ecb(key_str: str, b64_ciphertext: str) -> str:
+    return (
+        unpadding(
+            crijndael.decrypt(
+                base64.b64decode(b64_ciphertext),
+                key_str.encode(),
+                b'',
+                BLOCK_SIZE * 8,
+                KEY_SIZE * 8,
+                ECB_MODE
+            )
+        ).decode("utf-8")
+    )
 
 def generate_iv() -> str:
     return secrets.token_hex(16)
