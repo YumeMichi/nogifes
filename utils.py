@@ -15,7 +15,9 @@ RESOURCE_PATH = {
     "asset_bundle": "https://v2static.nogifes.jp/resource/Android_2017_4_1f1/",
     "focus_movie": "https://v2static.nogifes.jp/resource/Movie/Focus/",
     "high_focus_movie": "https://v2static.nogifes.jp/resource/Movie/HighFocusMovie/",
-    "reward_movie": "https://v2static.nogifes.jp/resource/Movie/Reward/"
+    "reward_movie": "https://v2static.nogifes.jp/resource/Movie/Reward/",
+    "live_bg": "https://v2static.nogifes.jp/resource/Movie/LiveBg/",
+    "high_live_bg": "https://v2static.nogifes.jp/resource/Movie/HighLiveBg/",
 }
 
 DOWNLOAD_PATH = {
@@ -23,7 +25,9 @@ DOWNLOAD_PATH = {
     "member_standing": "/mnt/data/downloads/nogifes/member_standing/",
     "focus_movie": "/mnt/data/downloads/nogifes/focus_movie/",
     "high_focus_movie": "/mnt/data/downloads/nogifes/high_focus_movie/",
-    "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/"
+    "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/",
+    "live_bg": "/mnt/data/downloads/nogifes/live_bg/",
+    "high_live_bg": "/mnt/data/downloads/nogifes/high_live_bg/",
 }
 
 FILENAME_REPLACEMENTS = {
@@ -33,6 +37,8 @@ FILENAME_REPLACEMENTS = {
     '"': "",
     "<": "(",
     ">": ")",
+    "＜": "(",
+    "＞": ")",
 }
 
 TEMP_DIR = "temp"

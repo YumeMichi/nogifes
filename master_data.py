@@ -69,7 +69,12 @@ def get_reward_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
 
     return None
 
-# ================ GirlMaster ================
-# ================ GirlMaster ================
-# ================ GirlMaster ================
+# ================ LiveBgMaster ================
+def get_live_bg_list() -> list[Any]:
+    return load_master_data("LiveBgMaster")
+
+# ================ ResourceMaster ================
+def get_resource_list() -> list[Any]:
+    return load_master_data("ResourceMaster")
+
 # ================ GirlMaster ================

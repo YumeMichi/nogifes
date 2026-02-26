@@ -182,8 +182,8 @@ def download_master_data() -> None:
 
         for i in range(3):
             try:
-                download(url, file_name)
-                break
+                if download(url, file_name):
+                    break
             except Exception:
                 print(f"[{i+1}/3] Failed to download {mst['name']}")
                 if i == 2:
