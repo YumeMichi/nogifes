@@ -160,6 +160,10 @@ def download_master_data() -> None:
         print(ret["error_data"]["userMessage"])
         return
 
+    masterdata_list_path = Path(f"1.0/masterdata/MasterDataList.json")
+    masterdata_list_path.parent.mkdir(parents=True, exist_ok=True)
+    masterdata_list_path.write_text(json.dumps(ret["mstlist"], ensure_ascii=False, indent=4) + "\n")
+
     # ======================
     # download masterdata
     # ======================
