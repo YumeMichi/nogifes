@@ -1,13 +1,11 @@
 <?php
 require './utils.php';
 
-$key = 'ACj3XbMVFaSBjVJ9iUnvqySA';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'home_photo_data' => [],
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/set_event_push_unit.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('SetEventPushUnitResponse', $data);

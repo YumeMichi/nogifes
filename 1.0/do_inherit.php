@@ -1,13 +1,14 @@
 <?php
 require './utils.php';
 
-$key = GetApiKey("DoInheritResponse");
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'user_id' => 20302870,
+    'user_token' => 'mHK0ll2Q9nDse5yK',
+    'friend_id' => '855096050',
+    'restriction_end_date' => 1757261798,
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/do_inherit.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('DoInheritResponse', $data);

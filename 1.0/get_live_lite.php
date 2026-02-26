@@ -1,13 +1,22 @@
 <?php
 require './utils.php';
 
-$key = 'Pn56dWkGjcBDsaGHc2VQ8s2L';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
-
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
+$live_data = [];
+$live_master = LoadJsonFile('masterdata/LiveMaster.json');
+foreach ($live_master as $live) {
+    if (($live['unconditional'] ?? '') === '1') {
+        continue;
+    }
+    $live_data[] = [
+        'live_id' => $live['live_id'] ?? 0,
+    ];
 }
 
-$data = file_get_contents('response/get_live_lite.json');
-echo RijndaelEncrypt($key, $iv, $data);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'live_data' => $live_data,
+    'success' => true,
+];
+
+SendEncryptedResponse('GetLiveLiteResponse', $data);

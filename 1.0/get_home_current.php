@@ -1,13 +1,24 @@
 <?php
 require './utils.php';
 
-$key = '28wqSLLEpKrcTDw0SZvJJJnU';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'home_mode' => 1,
+    'standing_set_id' => 1,
+    'standing_set_data' => [
+        [
+            'set_id' => 1,
+            'girl_id' => 504,
+            'home_costume_id' => 10060504,
+            'home_bg_id' => 1,
+        ],
+    ],
+    'photo_set_id' => 0,
+    'photo_set_data' => [],
+    'unit_movie_set_id' => 0,
+    'unit_movie_set_data' => [],
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/get_home_current.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('GetHomeCurrentResponse', $data);

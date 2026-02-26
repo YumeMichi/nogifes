@@ -1,13 +1,13 @@
 <?php
 require './utils.php';
 
-$key = 'rN2nyUA8wknBGABbCm7ByZqL';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'gold_update_count' => 0,
+    'dispatch_data' => [],
+    'lots_date' => 1758170227,
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/get_dispatch.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('GetDispatchResponse', $data);

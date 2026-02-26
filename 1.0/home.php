@@ -1,13 +1,17 @@
 <?php
 require './utils.php';
 
-$key = 'Zve3ruTjzsgjTPTUUnM9fTWw';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'general_mission_num' => 0,
+    'daily_mission_num' => 1,
+    'weekly_mission_num' => 0,
+    'special_mission_num' => 0,
+    'beginner_mission_num' => 0,
+    'presentbox_num' => 9,
+    'beginner_mission_all_clear' => false,
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/home.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('HomeResponse', $data);

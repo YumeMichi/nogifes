@@ -1,13 +1,14 @@
 <?php
 require './utils.php';
 
-$key = GetApiKey("DailyResponse");
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'login_bonus' => [],
+    'campaign_login_bonus' => [],
+    'sequential_login_bonus' => [],
+    'event_exchange_item_data' => [],
+    'success' => true,
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/daily.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('DailyResponse', $data);

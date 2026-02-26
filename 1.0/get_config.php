@@ -1,13 +1,42 @@
 <?php
 require './utils.php';
 
-$key = 'sdDXSxbW6EhdHj3MtFHgzFZT';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'config_result' => true,
+    'notes_design' => 1,
+    'notes_timing' => 0,
+    'notes_se' => 1,
+    'live_brightness' => 10,
+    'notes_speed' => 70,
+    'effect' => true,
+    'notes_size' => 100,
+    'skill_cutin' => true,
+    'icon_space' => 100,
+    'icon_line' => 0,
+    'restart_count' => true,
+    'mirror' => false,
+    'skill_panel' => true,
+    'lane' => false,
+    'live_finish_movie' => true,
+    'general_bgm_volume' => 5,
+    'general_se_volume' => 5,
+    'general_voice_volume' => 5,
+    'general_movie_volume' => 5,
+    'live_bgm_volume' => 5,
+    'live_se_volume' => 5,
+    'live_skill_se_volume' => 5,
+    'display_rotation' => 0,
+    'lp_notification' => true,
+    'dispatch_notification' => true,
+    'loop_live_notification' => true,
+    'continuation_pack_notification' => true,
+    'splash' => true,
+    'sr_protection' => true,
+    'ssr_protection' => true,
+    'ur_protection' => true,
+    'success' => true
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/get_config.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('GetConfigResponse', $data);

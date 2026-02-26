@@ -1,13 +1,22 @@
 <?php
 require './utils.php';
 
-$key = '6kxner4SJW69FWA6qhRAPYqq';
-$iv = $_SERVER['HTTP_NGZ_IV'];
-header('ngz_iv: ' . $iv);
+$data = [
+    'mstlist_version' => GetMasterdataVersion(),
+    'connect_key' => GetConnectKey(),
+    'found' => true,
+    'ranking' => 0,
+    'event_ranking_reward' => false,
+    'event_point' => 0,
+    'loop_lp' => 0,
+    'highscore_ranking' => 0,
+    'highscore_data' => [],
+    'token' => 200,
+    'girl_id' => 411,
+    'girl_ranking' => 0,
+    'form_flag' => false,
+    'real_goods_id' => 0,
+    'success' => true
+];
 
-if (!isset($iv) || $iv == '') {
-    header('HTTP/1.1 500 Internal Server Error');
-}
-
-$data = file_get_contents('response/get_event_data.json');
-echo RijndaelEncrypt($key, $iv, $data);
+SendEncryptedResponse('GetEventDataResponse', $data);
