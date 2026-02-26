@@ -8,7 +8,7 @@ import secrets
 from pathlib import Path
 from utils import download
 
-APPLICATION_VERSION = 21401
+APPLICATION_VERSION = 21402
 STORE_ID = 2  # Android
 
 KEY_SIZE = 24
