@@ -77,4 +77,6 @@ def get_live_bg_list() -> list[Any]:
 def get_resource_list() -> list[Any]:
     return load_master_data("ResourceMaster")
 
-# ================ GirlMaster ================
+# ================ OtherMovieMaster ================
+def get_other_movie_list() -> list[Any]:
+    return load_master_data("OtherMovieMaster")
