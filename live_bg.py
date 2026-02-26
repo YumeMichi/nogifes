@@ -29,7 +29,9 @@ def download_live_bg():
                     if resource["resource_type"] == 33:
                         bg_url = f"{RESOURCE_PATH["high_live_bg"]}{bg_file_name}"
                         bg_high_quality = 1
-                    bg_save_name = f"{sanitize_filename(f"{bg_name} ({live_bg["live_name"]})")}.mp4"
+                    bg_save_name = f"{sanitize_filename(bg_name)}.mp4"
+                    if live_bg["live_name"] != "--":
+                        bg_save_name = f"{sanitize_filename(f"{bg_name} ({live_bg["live_name"]})")}.mp4"
                     bg_save_path = f"{DOWNLOAD_PATH['live_bg']}{bg_save_name}"
                     if resource["resource_type"] == 33:
                         bg_save_path = f"{DOWNLOAD_PATH['high_live_bg']}{bg_save_name}"
