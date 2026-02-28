@@ -12,14 +12,14 @@ from PyCriCodecs import ACB, CPK, USM
 KEY = 0x0013F11BC5510101
 
 RESOURCE_PATH = {
-    "asset_bundle": "https://v2static.nogifes.jp/resource/Android_2017_4_1f1/",
-    "focus_movie": "https://v2static.nogifes.jp/resource/Movie/Focus/",
-    "high_focus_movie": "https://v2static.nogifes.jp/resource/Movie/HighFocusMovie/",
-    "reward_movie": "https://v2static.nogifes.jp/resource/Movie/Reward/",
-    "live_bg": "https://v2static.nogifes.jp/resource/Movie/LiveBg/",
-    "high_live_bg": "https://v2static.nogifes.jp/resource/Movie/HighLiveBg/",
-    "other_movie": "https://v2static.nogifes.jp/resource/Movie/Other/",
-    "high_other_movie": "https://v2static.nogifes.jp/resource/Movie/HighOtherMovie/",
+    "asset_bundle": "https://v1static.nogifes.jp/resource/Android_2017_4_1f1/",
+    "focus_movie": "https://v1static.nogifes.jp/resource/Movie/Focus/",
+    "high_focus_movie": "https://v1static.nogifes.jp/resource/Movie/HighFocusMovie/",
+    "reward_movie": "https://v1static.nogifes.jp/resource/Movie/Reward/",
+    "live_bg": "https://v1static.nogifes.jp/resource/Movie/LiveBg/",
+    "high_live_bg": "https://v1static.nogifes.jp/resource/Movie/HighLiveBg/",
+    "other_movie": "https://v1static.nogifes.jp/resource/Movie/Other/",
+    "high_other_movie": "https://v1static.nogifes.jp/resource/Movie/HighOtherMovie/",
 }
 
 DOWNLOAD_PATH = {
