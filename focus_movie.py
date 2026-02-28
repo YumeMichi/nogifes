@@ -72,17 +72,19 @@ def download_reward_focus_movie(girl_id: int):
             continue
 
         if "[F]" in movie_data["reward_movie_name"]:
-            movie_name = movie_data["reward_movie_name"].split("<br />")
-            movie_name_main = (
-                movie_name[1]
-                    .replace("[F]", "")
-                    .replace(" SPフルフォーカスMOVIE", "")
-                    .replace(" SPライブフォーカスMOVIE", "")
-                    .replace(" SPﾌﾙﾌｫｰｶｽMOVIE", "")
-                    .replace(" SPﾌｫｰｶｽMOVIE", "")
-            )
-            movie_name_sub = movie_name[0].replace("全ツ", "真夏の全国ツアー")
-            movie_name = f"{movie_name_main} ({movie_name_sub})"
+            movie_name_parts = movie_data["reward_movie_name"].split("<br />")
+            if len(movie_name_parts) > 1:
+                sub_movie_name, main_movie_name = movie_data["reward_movie_name"].split("<br />")
+                main_movie_name = re.sub(
+                    r"\[F\]| SP(フルフォーカスMOVIE|ライブフォーカスMOVIE|ライブMOVIE|ﾌﾙﾌｫｰｶｽMOVIE|ﾌｫｰｶｽMOVIE)",
+                    "",
+                    main_movie_name
+                )
+
+                sub_movie_name = sub_movie_name.replace("全ツ", "真夏の全国ツアー")
+                movie_name = f"{main_movie_name} ({sub_movie_name})"
+            else:
+                movie_name = movie_name_parts[0].replace("全ツ", "真夏の全国ツアー")
             movie_file_name = f"reward_movie_{movie_data["reward_movie_id"]:05d}.usme"
             movie_url = f"{RESOURCE_PATH['reward_movie']}{movie_file_name}"
             movie_save_name = f"{sanitize_filename(movie_name)}.mp4"

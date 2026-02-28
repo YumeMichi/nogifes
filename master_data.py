@@ -47,6 +47,22 @@ def get_unit_by_girl_id(girl_id: int) -> list[Any]:
 
     return unit_data
 
+def get_unit_girl_list() -> dict[str, list[str]]:
+    data = load_master_data("UnitMaster")
+    girl_data = get_girl_map()
+
+    unit_girl_list: dict[str, list[str]] = {}
+    for item in data:
+        girl_name: list[str] = []
+        girl_name.append(girl_data[item["girl_id1"]])
+
+        if item["girl_id2"] != 0:
+            girl_name.append(girl_data[item["girl_id2"]])
+
+        unit_girl_list[item["unit_id"]] = girl_name
+
+    return unit_girl_list
+
 # ================ FocusMovieMaster ================
 def get_focus_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
     data = load_master_data("FocusMovieMaster")
@@ -59,8 +75,11 @@ def get_focus_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
     return None
 
 # ================ RewardMovieMaster ================
+def get_reward_movie_list() -> list[Any]:
+    return load_master_data("RewardMovieMaster")
+
 def get_reward_movie_by_unit_id(unit_id: int) -> dict[str, Any] | None:
-    data = load_master_data("RewardMovieMaster")
+    data = get_reward_movie_list()
 
     for item in data:
         for unit in item["unit_data"]:

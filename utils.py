@@ -32,6 +32,7 @@ DOWNLOAD_PATH = {
     "high_live_bg": "/mnt/data/downloads/nogifes/high_live_bg/",
     "other_movie": "/mnt/data/downloads/nogifes/other_movie/",
     "high_other_movie": "/mnt/data/downloads/nogifes/high_other_movie/",
+    "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/",
 }
 
 FILENAME_REPLACEMENTS = {
