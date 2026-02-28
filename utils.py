@@ -27,7 +27,7 @@ DOWNLOAD_PATH = {
     "member_standing": "/mnt/data/downloads/nogifes/member_standing/",
     "focus_movie": "/mnt/data/downloads/nogifes/focus_movie/",
     "high_focus_movie": "/mnt/data/downloads/nogifes/high_focus_movie/",
-    "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/",
+    "reward_focus_movie": "/mnt/data/downloads/nogifes/reward_focus_movie/",
     "live_bg": "/mnt/data/downloads/nogifes/live_bg/",
     "high_live_bg": "/mnt/data/downloads/nogifes/high_live_bg/",
     "other_movie": "/mnt/data/downloads/nogifes/other_movie/",

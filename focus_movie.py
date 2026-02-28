@@ -4,7 +4,7 @@ from master_data import *
 from utils import *
 
 FOCUS_MOVIE_DATA_PATH = "data/focus_movie.json"
-REWARD_MOVIE_DATA_PATH = "data/reward_movie.json"
+REWARD_FOCUS_MOVIE_DATA_PATH = "data/reward_focus_movie.json"
 
 def download_focus_movie(girl_id: int):
     girl_data = get_girl_by_girl_id(girl_id)
@@ -86,7 +86,7 @@ def download_reward_focus_movie(girl_id: int):
             movie_file_name = f"reward_movie_{movie_data["reward_movie_id"]:05d}.usme"
             movie_url = f"{RESOURCE_PATH['reward_movie']}{movie_file_name}"
             movie_save_name = f"{sanitize_filename(movie_name)}.mp4"
-            movie_save_path = f"{DOWNLOAD_PATH["reward_movie"]}{girl_data["girl_name"]}/{movie_save_name}"
+            movie_save_path = f"{DOWNLOAD_PATH["reward_focus_movie"]}{girl_data["girl_name"]}/{movie_save_name}"
 
             movie = {
                 "movie_id": movie_data["reward_movie_id"],
@@ -112,7 +112,7 @@ def download_reward_focus_movie(girl_id: int):
                         os.remove(video_path)
                         os.remove(audio_path)
                         os.remove(usme_path)
-                        update_movie_data(REWARD_MOVIE_DATA_PATH, movie)
+                        update_movie_data(REWARD_FOCUS_MOVIE_DATA_PATH, movie)
                         print(f"Successfully extracted {movie_save_name}")
 
 def update_movie_data(json_path: str, json_data: dict):
