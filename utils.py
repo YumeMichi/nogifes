@@ -111,7 +111,8 @@ def extract_usm(file_path: str) -> list[str]:
         for i, item in enumerate(stream_data):
             if i == 0:
                 continue
-            file_list.append(f"{TEMP_DIR}/{item["filename"][1]}")
+            # HACK: Handle "D:\client\tools\データ入力ツール\動画変換\reward_movie_00605.ivf"
+            file_list.append(f"{TEMP_DIR}/{item["filename"][1]}".replace("D:\\", ""))
     except Exception as e:
         print(f"{file_path} extraction failed: {e}")
 
