@@ -75,16 +75,17 @@ def download_reward_focus_movie(girl_id: int):
             movie_name_parts = movie_data["reward_movie_name"].split("<br />")
             if len(movie_name_parts) > 1:
                 sub_movie_name, main_movie_name = movie_data["reward_movie_name"].split("<br />")
-                main_movie_name = re.sub(
-                    r"\[F\]| SP(フルフォーカスMOVIE|ライブフォーカスMOVIE|ライブMOVIE|ﾌﾙﾌｫｰｶｽMOVIE|ﾌｫｰｶｽMOVIE)",
-                    "",
-                    main_movie_name
-                )
-
                 sub_movie_name = sub_movie_name.replace("全ツ", "真夏の全国ツアー")
                 movie_name = f"{main_movie_name} ({sub_movie_name})"
             else:
                 movie_name = movie_name_parts[0].replace("全ツ", "真夏の全国ツアー")
+
+            movie_name = re.sub(
+                r"\[F\]|\s*SP(?: MOVIE|フルフォーカスMOVIE|ライブフォーカスMOVIE|ライブMOVIE|ﾌﾙﾌｫｰｶｽMOVIE|ﾌｫｰｶｽMOVIE)",
+                "",
+                movie_name
+            )
+
             movie_file_name = f"reward_movie_{movie_data["reward_movie_id"]:05d}.usme"
             movie_url = f"{RESOURCE_PATH['reward_movie']}{movie_file_name}"
             movie_save_name = f"{sanitize_filename(movie_name)}.mp4"
@@ -105,11 +106,10 @@ def download_reward_focus_movie(girl_id: int):
                 os.remove(usme_path)
 
             if download(movie_url, movie_file_name):
-                if extract_usm(usme_path):
-                    video_path = f"{TEMP_DIR}/{movie_file_name[:-5]}.264_med"
-                    audio_path = f"{TEMP_DIR}/{movie_file_name[:-5]}.avi"
-                    if movie_data["reward_movie_id"] in [181, 182, 183]:
-                        video_path = f"{TEMP_DIR}/{movie_file_name[:-5]}_50.264_med"
+                file_list = extract_usm(usme_path)
+                if len(file_list) > 0:
+                    video_path = file_list[0]
+                    audio_path = file_list[1]
                     if remux_video(video_path, audio_path, movie_save_path):
                         os.remove(video_path)
                         os.remove(audio_path)

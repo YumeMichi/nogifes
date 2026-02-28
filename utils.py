@@ -98,16 +98,24 @@ def extrack_cpk(file_path: str) -> bool:
 
     return True
 
-def extract_usm(file_path: str) -> bool:
+def extract_usm(file_path: str) -> list[str]:
     print(f"Extracting USM {file_path}...")
+
+    file_list: list[str] = []
     try:
         usm = USM(file_path, KEY)
         usm.extract(TEMP_DIR)
+
+        usm_data = usm.get_metadata()
+        stream_data = usm_data[0]["CRIUSF_DIR_STREAM"]
+        for i, item in enumerate(stream_data):
+            if i == 0:
+                continue
+            file_list.append(f"{TEMP_DIR}/{item["filename"][1]}")
     except Exception as e:
         print(f"{file_path} extraction failed: {e}")
-        return False
 
-    return True
+    return file_list
 
 def extract_acb(file_path: str) -> bool:
     print(f"Extracting ACB {file_path}...")
@@ -162,24 +170,32 @@ def run_cmd(cmd: list[str], show_output: bool = True) -> str:
 def ffmpeg_has_libfdk_aac() -> bool:
     return "libfdk_aac" in run_cmd(["ffmpeg", "-encoders"], False)
 
-def remux_video(video_path: str, audio_path: str, output_path: str) -> bool:
+def remux_video(video_path: str, audio_path: str | None, output_path: str) -> bool:
     print(f"Remuxing {video_path}, {audio_path}...")
     try:
         if not os.path.exists(output_path):
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-        audio_codec = "aac"
-        if ffmpeg_has_libfdk_aac():
-            audio_codec = "libfdk_aac"
+        if audio_path is None:
+            run_cmd([
+                "ffmpeg", "-y",
+                "-i", video_path,
+                "-c:v", "copy",
+                output_path
+            ], False)
+        else:
+            audio_codec = "aac"
+            if ffmpeg_has_libfdk_aac():
+                audio_codec = "libfdk_aac"
 
-        run_cmd([
-            "ffmpeg", "-y",
-            "-i", video_path,
-            "-i", audio_path,
-            "-c:v", "copy",
-            "-c:a", audio_codec, "-b:a", "256k",
-            output_path
-        ], False)
+            run_cmd([
+                "ffmpeg", "-y",
+                "-i", video_path,
+                "-i", audio_path,
+                "-c:v", "copy",
+                "-c:a", audio_codec, "-b:a", "256k",
+                output_path
+            ], False)
     except Exception as e:
         print(f"{video_path} remux failed: {e}")
         return False
