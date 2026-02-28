@@ -43,7 +43,7 @@ def download_live_bg():
                     }
 
                     if os.path.exists(bg_save_path):
-                        print(f"{bg_save_path} already exists")
+                        # print(f"{bg_save_path} already exists")
                         continue
 
                     cpk_path = os.path.join(TEMP_DIR, bg_file_name)

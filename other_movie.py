@@ -32,7 +32,7 @@ def download_other_movie():
         }
 
         if os.path.exists(movie_save_path):
-            print(f"{movie_save_name} already exists")
+            # print(f"{movie_save_name} already exists")
             continue
 
         cpk_path = os.path.join(TEMP_DIR, movie_file_name)

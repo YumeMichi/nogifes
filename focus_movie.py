@@ -38,7 +38,7 @@ def download_focus_movie(girl_id: int):
             }
 
             if os.path.exists(movie_save_path):
-                print(f"{movie_save_name} already exists")
+                # print(f"{movie_save_name} already exists")
                 continue
 
             cpk_path = os.path.join(TEMP_DIR, movie_file_name)
@@ -97,7 +97,7 @@ def download_reward_focus_movie(girl_id: int):
             }
 
             if os.path.exists(movie_save_path):
-                print(f"{movie_save_name} already exists")
+                # print(f"{movie_save_name} already exists")
                 continue
 
             usme_path = os.path.join(TEMP_DIR, movie_file_name)
