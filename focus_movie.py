@@ -50,9 +50,10 @@ def download_focus_movie(girl_id: int):
                     extracted_path = cpk_path[:-4]
                     movie_path = f"{extracted_path}/movie"
                     music_path = f"{extracted_path}/music"
-                    if extract_usm(movie_path) and extract_acb(music_path):
-                        video_path = f"{TEMP_DIR}/movie.264_med"
-                        audio_path = f"{TEMP_DIR}/0.wav"
+                    file_list = extract_usm(movie_path)
+                    if len(file_list) > 0 and extract_acb(music_path):
+                        video_path = file_list[0]
+                        audio_path = file_list[1]
                         if remux_video(video_path, audio_path, movie_save_path):
                             os.remove(video_path)
                             os.remove(audio_path)

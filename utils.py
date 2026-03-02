@@ -20,6 +20,7 @@ RESOURCE_PATH = {
     "high_live_bg": "https://v1static.nogifes.jp/resource/Movie/HighLiveBg/",
     "other_movie": "https://v1static.nogifes.jp/resource/Movie/Other/",
     "high_other_movie": "https://v1static.nogifes.jp/resource/Movie/HighOtherMovie/",
+    "adventure_movie": "https://v1static.nogifes.jp/resource/Movie/AdventureMovie/",
 }
 
 DOWNLOAD_PATH = {
@@ -33,6 +34,7 @@ DOWNLOAD_PATH = {
     "other_movie": "/mnt/data/downloads/nogifes/other_movie/",
     "high_other_movie": "/mnt/data/downloads/nogifes/high_other_movie/",
     "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/",
+    "adventure_movie": "/mnt/data/downloads/nogifes/adventure_movie/",
 }
 
 FILENAME_REPLACEMENTS = {
