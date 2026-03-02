@@ -21,6 +21,7 @@ RESOURCE_PATH = {
     "other_movie": "https://v1static.nogifes.jp/resource/Movie/Other/",
     "high_other_movie": "https://v1static.nogifes.jp/resource/Movie/HighOtherMovie/",
     "adventure_movie": "https://v1static.nogifes.jp/resource/Movie/AdventureMovie/",
+    "member_movie": "https://v1static.nogifes.jp/resource/Movie/Member/",
 }
 
 DOWNLOAD_PATH = {
@@ -35,6 +36,7 @@ DOWNLOAD_PATH = {
     "high_other_movie": "/mnt/data/downloads/nogifes/high_other_movie/",
     "reward_movie": "/mnt/data/downloads/nogifes/reward_movie/",
     "adventure_movie": "/mnt/data/downloads/nogifes/adventure_movie/",
+    "member_movie": "/mnt/data/downloads/nogifes/member_movie/",
 }
 
 FILENAME_REPLACEMENTS = {
@@ -113,8 +115,14 @@ def extract_usm(file_path: str) -> list[str]:
         for i, item in enumerate(stream_data):
             if i == 0:
                 continue
-            # HACK: Handle "D:\client\tools\データ入力ツール\動画変換\reward_movie_00605.ivf"
-            file_list.append(f"{TEMP_DIR}/{item["filename"][1]}".replace("D:\\", ""))
+            # HACK: Handle windows path
+            # D:\client\tools\データ入力ツール\動画変換\reward_movie_00605.ivf
+            # K:\client\tools\データ入力ツール\動画変換\movie\member_standing_movie_0101.ivf
+            file_list.append(
+                f"{TEMP_DIR}/{item["filename"][1]}"
+                    .replace("D:\\", "")
+                    .replace("K:\\", "")
+            )
     except Exception as e:
         print(f"{file_path} extraction failed: {e}")
 
