@@ -24,6 +24,7 @@ RESOURCE_PATH = {
     "member_movie": "https://v1static.nogifes.jp/resource/Movie/Member/",
     "unit_movie": "https://v1static.nogifes.jp/resource/Movie/MovieCard/",
     "unit_gacha_movie": "https://v1static.nogifes.jp/resource/Movie/UnitGachaMovie/",
+    "live_finish_movie": "https://v1static.nogifes.jp/resource/Movie/LiveFinishMovie/",
 }
 
 DOWNLOAD_PATH = {
@@ -41,6 +42,7 @@ DOWNLOAD_PATH = {
     "member_movie": "/mnt/data/downloads/nogifes/member_movie/",
     "unit_movie": "/mnt/data/downloads/nogifes/unit_movie/",
     "unit_gacha_movie": "/mnt/data/downloads/nogifes/unit_gacha_movie/",
+    "live_finish_movie": "/mnt/data/downloads/nogifes/live_finish_movie/",
 }
 
 FILENAME_REPLACEMENTS = {
