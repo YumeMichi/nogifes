@@ -23,6 +23,7 @@ RESOURCE_PATH = {
     "adventure_movie": "https://v1static.nogifes.jp/resource/Movie/AdventureMovie/",
     "member_movie": "https://v1static.nogifes.jp/resource/Movie/Member/",
     "unit_movie": "https://v1static.nogifes.jp/resource/Movie/MovieCard/",
+    "unit_gacha_movie": "https://v1static.nogifes.jp/resource/Movie/UnitGachaMovie/",
 }
 
 DOWNLOAD_PATH = {
@@ -39,6 +40,7 @@ DOWNLOAD_PATH = {
     "adventure_movie": "/mnt/data/downloads/nogifes/adventure_movie/",
     "member_movie": "/mnt/data/downloads/nogifes/member_movie/",
     "unit_movie": "/mnt/data/downloads/nogifes/unit_movie/",
+    "unit_gacha_movie": "/mnt/data/downloads/nogifes/unit_gacha_movie/",
 }
 
 FILENAME_REPLACEMENTS = {
@@ -119,10 +121,12 @@ def extract_usm(file_path: str) -> list[str]:
                 continue
             # HACK: Handle windows path
             # D:\client\tools\データ入力ツール\動画変換\reward_movie_00605.ivf
+            # F:\client\tools\データ入力ツール\動画変換\movie\unit_gacha_movie_0122870.ivf
             # K:\client\tools\データ入力ツール\動画変換\movie\member_standing_movie_0101.ivf
             file_list.append(
                 f"{TEMP_DIR}/{item["filename"][1]}"
                     .replace("D:\\", "")
+                    .replace("F:\\", "")
                     .replace("K:\\", "")
             )
     except Exception as e:

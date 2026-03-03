@@ -101,5 +101,5 @@ def get_other_movie_list() -> list[Any]:
     return load_master_data("OtherMovieMaster")
 
 # ================ UnitMovieMaster ================
-def get_unit_movie() -> list[Any]:
+def get_unit_movie_list() -> list[Any]:
     return load_master_data("UnitMovieMaster")

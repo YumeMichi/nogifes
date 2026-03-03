@@ -5,7 +5,7 @@ from utils import *
 UNIT_MOVIE_DATA_PATH = "data/unit_movie.json"
 
 def download_unit_movie():
-    unit_movie_data = get_unit_movie()
+    unit_movie_data = get_unit_movie_list()
     unit_girl_data = get_unit_girl_list()
 
     for movie_data in unit_movie_data:
