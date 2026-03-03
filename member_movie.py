@@ -30,7 +30,6 @@ def download_member_movie():
 
         if download(movie_url, movie_file_name):
             file_list = extract_usm(usme_path)
-            print(file_list)
             if len(file_list) > 0:
                 video_path = file_list[0]
                 if remux_video(video_path, None, movie_save_path):

@@ -99,3 +99,7 @@ def get_resource_list() -> list[Any]:
 # ================ OtherMovieMaster ================
 def get_other_movie_list() -> list[Any]:
     return load_master_data("OtherMovieMaster")
+
+# ================ UnitMovieMaster ================
+def get_unit_movie() -> list[Any]:
+    return load_master_data("UnitMovieMaster")
