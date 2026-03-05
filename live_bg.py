@@ -58,7 +58,7 @@ def download_live_bg():
                             file_list = extract_usm(movie_path)
                             if len(file_list) > 0 and extract_acb(music_path):
                                 video_path = file_list[0]
-                                audio_path = file_list[1]
+                                audio_path = f"{TEMP_DIR}/0.wav"
                                 if remux_video(video_path, audio_path, bg_save_path):
                                     os.remove(video_path)
                                     os.remove(audio_path)
