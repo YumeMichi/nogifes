@@ -35,9 +35,11 @@ def download_live_finish_movie():
                 file_list = extract_usm(usme_path)
                 if len(file_list) > 0:
                     video_path = file_list[0]
-                    audio_path = file_list[1]
+                    audio_path = file_list[1] if len(file_list) > 1 else None
                     if remux_video(video_path, audio_path, movie_save_path):
                         os.remove(video_path)
+                        if audio_path:
+                            os.remove(audio_path)
                         os.remove(usme_path)
                         update_movie_data(UNIT_MOVIE_DATA_PATH, movie)
                         print(f"Successfully extracted {movie_save_name}")

@@ -72,7 +72,7 @@ def generate_iv() -> str:
 def snake_to_pascal(name: str) -> str:
     return "".join(word.capitalize() for word in name.split("_"))
 
-def sha256_file(path: str) -> str:
+def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
         for chunk in iter(lambda: f.read(8192), b""):
@@ -176,13 +176,11 @@ def download_master_data() -> None:
         file_name = snake_to_pascal(mst["name"]) + "Master"
         temp_path = temp_dir / file_name
 
-        if temp_path.exists():
-            if sha256_file(temp_path) == mst["hash"]:
-                print(f"{file_name} is up to date.")
-                continue
+        if temp_path.exists() and sha256_file(temp_path) == mst["hash"]:
+            print(f"{file_name} is up to date.")
+            continue
 
         url = f"https://v2static.nogifes.jp/resource/mst/{mst['file']}?ver={mst['version']}"
-        # print(f"Downloading {url}")
 
         for i in range(3):
             try:
@@ -194,13 +192,8 @@ def download_master_data() -> None:
                     raise
 
         file_key = key_map[file_name]
-        decrypted = rj256_decrypt_ecb(file_key, Path(f"{temp_dir}/{file_name}").read_bytes())
-
-        pretty = json.dumps(
-            json.loads(decrypted),
-            ensure_ascii=False,
-            indent=4,
-        )
+        decrypted = rj256_decrypt_ecb(file_key, temp_path.read_bytes())
+        pretty = json.dumps(json.loads(decrypted), ensure_ascii=False, indent=4)
 
         out_path = Path(f"1.0/masterdata/{file_name}.json")
         out_path.parent.mkdir(parents=True, exist_ok=True)

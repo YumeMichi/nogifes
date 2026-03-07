@@ -46,7 +46,7 @@ def download_focus_movie(girl_id: int):
                 os.remove(cpk_path)
 
             if download(movie_url, movie_file_name):
-                if extrack_cpk(cpk_path):
+                if extract_cpk(cpk_path):
                     extracted_path = cpk_path[:-4]
                     movie_path = f"{extracted_path}/movie"
                     music_path = f"{extracted_path}/music"
@@ -110,31 +110,32 @@ def download_reward_focus_movie(girl_id: int):
                 file_list = extract_usm(usme_path)
                 if len(file_list) > 0:
                     video_path = file_list[0]
-                    audio_path = file_list[1]
+                    audio_path = file_list[1] if len(file_list) > 1 else None
                     if remux_video(video_path, audio_path, movie_save_path):
                         os.remove(video_path)
-                        os.remove(audio_path)
+                        if audio_path:
+                            os.remove(audio_path)
                         os.remove(usme_path)
                         update_movie_data(REWARD_FOCUS_MOVIE_DATA_PATH, movie)
                         print(f"Successfully extracted {movie_save_name}")
 
 def update_movie_data(json_path: str, json_data: dict):
+    data = []
     if os.path.exists(json_path):
         with open(json_path, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
             except json.JSONDecodeError:
-                data = []
+                pass
     else:
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
-        data = []
 
     for i, item in enumerate(data):
         if item["movie_id"] == json_data["movie_id"]:
             data[i] = json_data
             break
-    else:
-        data.append(json_data)
+        else:
+            data.append(json_data)
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)

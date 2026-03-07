@@ -1,4 +1,5 @@
 import datetime
+import functools
 import jaconv
 import os
 import re
@@ -57,6 +58,9 @@ FILENAME_REPLACEMENTS = {
 }
 
 TEMP_DIR = "temp"
+DOWNLOAD_RETRIES = 3
+REQUEST_TIMEOUT = 30
+HTTP_SESSION = requests.Session()
 
 def sanitize_filename(title: str) -> str:
     name = title
@@ -69,35 +73,36 @@ def sanitize_filename(title: str) -> str:
     return name or "untitled"
 
 def download(url: str, file_name: str) -> bool:
-    # print(f"Downloading {file_name}...")
-    try:
-        response = requests.get(url, stream=True)
-        response.raise_for_status()
-    except requests.RequestException:
-        print(f"{file_name} download failed!")
-        return False
+    os.makedirs(TEMP_DIR, exist_ok=True)
+    file_path = os.path.join(TEMP_DIR, file_name)
 
-    total_size = int(response.headers.get("Content-Length", 0))
-    try:
-        os.makedirs(TEMP_DIR, exist_ok=True)
-        with open(os.path.join(TEMP_DIR, file_name), "wb") as f, tqdm.tqdm(
-            total=total_size,
-            unit="B",
-            unit_scale=True,
-            unit_divisor=1024,
-            desc=file_name.ljust(32),
-        ) as progress:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    f.write(chunk)
-                    progress.update(len(chunk))
-    except Exception as e:
-        print(f"{file_name} write failed: {e}")
-        return False
+    for attempt in range(1, DOWNLOAD_RETRIES + 1):
+        try:
+            with HTTP_SESSION.get(url, stream=True, timeout=REQUEST_TIMEOUT) as response:
+                response.raise_for_status()
+                total_size = int(response.headers.get("Content-Length", 0))
 
-    return True
+                with open(file_path, "wb") as f, tqdm.tqdm(
+                    total=total_size,
+                    unit="B",
+                    unit_scale=True,
+                    unit_divisor=1024,
+                    desc=file_name.ljust(32),
+                ) as progress:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        if not chunk:
+                            continue
+                        f.write(chunk)
+                        progress.update(len(chunk))
+            return True
+        except (requests.RequestException, OSError) as e:
+            print(f"[{attempt}/{DOWNLOAD_RETRIES}] {file_name} download failed: {e}")
+            if os.path.exists(file_path):
+                os.remove(file_path)
 
-def extrack_cpk(file_path: str) -> bool:
+    return False
+
+def extract_cpk(file_path: str) -> bool:
     print(f"Extracting CPK {file_path}...")
     try:
         cpk = CPK(file_path)
@@ -111,30 +116,20 @@ def extrack_cpk(file_path: str) -> bool:
 def extract_usm(file_path: str) -> list[str]:
     print(f"Extracting USM {file_path}...")
 
-    file_list: list[str] = []
     try:
         usm = USM(file_path, KEY)
         usm.extract(TEMP_DIR)
 
         usm_data = usm.get_metadata()
         stream_data = usm_data[0]["CRIUSF_DIR_STREAM"]
-        for i, item in enumerate(stream_data):
-            if i == 0:
-                continue
-            # HACK: Handle windows path
-            # D:\client\tools\データ入力ツール\動画変換\reward_movie_00605.ivf
-            # F:\client\tools\データ入力ツール\動画変換\movie\unit_gacha_movie_0122870.ivf
-            # K:\client\tools\データ入力ツール\動画変換\movie\member_standing_movie_0101.ivf
-            file_list.append(
-                f"{TEMP_DIR}/{item["filename"][1]}"
-                    .replace("D:\\", "")
-                    .replace("F:\\", "")
-                    .replace("K:\\", "")
-            )
+
+        return [
+            f"{TEMP_DIR}/{item['filename'][1]}".replace("D:\\", "").replace("F:\\", "").replace("K:\\", "")
+            for item in stream_data[1:]
+        ]
     except Exception as e:
         print(f"{file_path} extraction failed: {e}")
-
-    return file_list
+        return []
 
 def extract_acb(file_path: str) -> bool:
     print(f"Extracting ACB {file_path}...")
@@ -148,25 +143,19 @@ def extract_acb(file_path: str) -> bool:
     return True
 
 def extract_unity_assets(file_path: str) -> list[str]:
-    file_list: list[str] = []
-
+    file_list = []
     env = UnityPy.load(file_path)
+
     for obj in env.objects:
         if obj.type.name == "Texture2D":
             data = obj.parse_as_object()
-            dest = os.path.join(TEMP_DIR, data.m_Name)
-
-            dest, _ = os.path.splitext(dest)
-            dest = dest + ".png"
-
-            img = data.image
-            img.save(dest)
-
+            dest = os.path.join(TEMP_DIR, f"{data.m_Name}.png")
+            data.image.save(dest)
             file_list.append(dest)
 
     return file_list
 
-def run_cmd(cmd: list[str], show_output: bool = True) -> str:
+def run_cmd(cmd: list[str], show_output: bool = True, check: bool = False) -> str:
     process = subprocess.Popen(
         cmd,
         stdout=subprocess.PIPE,
@@ -182,44 +171,38 @@ def run_cmd(cmd: list[str], show_output: bool = True) -> str:
         if show_output:
             print(line, end="")
 
-    process.wait()
-    return "".join(output_lines)
+    return_code = process.wait()
+    output = "".join(output_lines)
+    if check and return_code != 0:
+        raise subprocess.CalledProcessError(return_code, cmd, output=output)
+    return output
 
 
+@functools.cache
 def ffmpeg_has_libfdk_aac() -> bool:
-    return "libfdk_aac" in run_cmd(["ffmpeg", "-encoders"], False)
+    try:
+        return "libfdk_aac" in run_cmd(["ffmpeg", "-encoders"], False, check=True)
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return False
 
 def remux_video(video_path: str, audio_path: str | None, output_path: str) -> bool:
     print(f"Remuxing {video_path}, {audio_path}...")
+
     try:
-        if not os.path.exists(output_path):
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
         if audio_path is None:
-            run_cmd([
-                "ffmpeg", "-y",
-                "-i", video_path,
-                "-c:v", "copy",
-                output_path
-            ], False)
+            run_cmd(["ffmpeg", "-y", "-i", video_path, "-c:v", "copy", output_path], False, check=True)
         else:
-            audio_codec = "aac"
-            if ffmpeg_has_libfdk_aac():
-                audio_codec = "libfdk_aac"
-
+            audio_codec = "libfdk_aac" if ffmpeg_has_libfdk_aac() else "aac"
             run_cmd([
-                "ffmpeg", "-y",
-                "-i", video_path,
-                "-i", audio_path,
-                "-c:v", "copy",
-                "-c:a", audio_codec, "-b:a", "256k",
-                output_path
-            ], False)
-    except Exception as e:
+                "ffmpeg", "-y", "-i", video_path, "-i", audio_path,
+                "-c:v", "copy", "-c:a", audio_codec, "-b:a", "256k", output_path
+            ], False, check=True)
+        return True
+    except (FileNotFoundError, subprocess.CalledProcessError, OSError) as e:
         print(f"{video_path} remux failed: {e}")
         return False
-
-    return True
 
 def write_complete(dir_path: str):
     with open(os.path.join(dir_path, ".complete"), "w") as f:

@@ -40,7 +40,7 @@ def download_other_movie():
             os.remove(cpk_path)
 
         if download(movie_url, movie_file_name):
-            if extrack_cpk(cpk_path):
+            if extract_cpk(cpk_path):
                 extracted_path = cpk_path[:-4]
                 movie_path = f"{extracted_path}/movie"
                 music_path = f"{extracted_path}/music"

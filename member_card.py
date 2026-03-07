@@ -34,9 +34,6 @@ def download_member_card():
         if os.path.exists(card_l_path):
             os.remove(card_l_path)
 
-        if not os.path.exists(card_save_path):
-            os.makedirs(card_save_path, exist_ok=True)
-
         if not check_complete(card_save_path):
             if os.path.exists(card_save_path):
                 shutil.rmtree(card_save_path)
