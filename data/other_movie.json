@@ -1070,5 +1070,29 @@
         "live_date": "2024年8月24日",
         "live_location": "バンテリンドーム ナゴヤ",
         "high_quality": 1
+    },
+    {
+        "movie_id": 137,
+        "movie_name": "不道徳な夏_真夏の全国ツアー2025",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0
+    },
+    {
+        "movie_id": 138,
+        "movie_name": "さざ波は戻らない_34thSGアンダーライブ",
+        "live_name": "34thSGアンダーライブ",
+        "live_date": "2024年1月26日",
+        "live_location": "ぴあアリーナMM",
+        "high_quality": 1
+    },
+    {
+        "movie_id": 139,
+        "movie_name": "さざ波は戻らない_35thSGアンダーライブ",
+        "live_name": "35thSGアンダーライブ",
+        "live_date": "2024年6月8日",
+        "live_location": "有明アリーナ",
+        "high_quality": 1
     }
 ]

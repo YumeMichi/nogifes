@@ -1718,5 +1718,15 @@
         "live_bg_id": 90000841,
         "live_bg_name": "僕がいる場所 -12th YEAR BIRTHDAY LIVE ver-",
         "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 450051,
+        "live_bg_name": "不道徳な夏",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 90000851,
+        "live_bg_name": "さざ波は戻らない -39thSGアンダーライブ ver-",
+        "live_bg_has_high_quality": 0
     }
 ]
