@@ -362,7 +362,7 @@
     {
         "live_bg_id": 140021,
         "live_bg_name": "嫉妬の権利",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 140031,
@@ -972,7 +972,7 @@
     {
         "live_bg_id": 350021,
         "live_bg_name": "深読み",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 350031,
@@ -1727,6 +1727,16 @@
     {
         "live_bg_id": 90000851,
         "live_bg_name": "さざ波は戻らない -39thSGアンダーライブ ver-",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 460021,
+        "live_bg_name": "市営ダンスホール",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 460031,
+        "live_bg_name": "純粋とは何か？",
         "live_bg_has_high_quality": 0
     }
 ]

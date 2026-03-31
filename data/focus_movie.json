@@ -1301,7 +1301,7 @@
         "live_name": "真夏の全国ツアー2016",
         "live_date": "2016年8月13日",
         "live_location": "ゼビオアリーナ仙台",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "齋藤飛鳥"
     },
     {
@@ -1364,7 +1364,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "齋藤飛鳥"
     },
     {
@@ -4271,7 +4271,7 @@
         "live_name": "アンダーライブ2018～関東シリーズ～",
         "live_date": "2018年12月19日",
         "live_location": "武蔵野の森総合スポーツプラザ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "鈴木絢音"
     },
     {
@@ -5216,7 +5216,7 @@
         "live_name": "アンダーライブ2019 at 幕張メッセ",
         "live_date": "2019年10月10日",
         "live_location": "幕張メッセ 幕張イベントホール",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "伊藤理々杏"
     },
     {
@@ -5396,7 +5396,7 @@
         "live_name": "アンダーライブ2018～関東シリーズ～",
         "live_date": "2018年12月20日",
         "live_location": "武蔵野の森総合スポーツプラザ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "岩本蓮加"
     },
     {
@@ -5675,7 +5675,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "梅澤美波"
     },
     {
@@ -6377,7 +6377,7 @@
         "live_name": "アンダーライブ2018～関東シリーズ～",
         "live_date": "2018年12月20日",
         "live_location": "武蔵野の森総合スポーツプラザ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "阪口珠美"
     },
     {
@@ -7304,7 +7304,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月31日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "山下美月"
     },
     {
@@ -7835,7 +7835,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月31日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "与田祐希"
     },
     {
@@ -8186,7 +8186,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "遠藤さくら"
     },
     {
@@ -8627,7 +8627,7 @@
         "live_name": "29thSGアンダーライブ",
         "live_date": "2022年3月25日",
         "live_location": "ぴあアリーナMM",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "金川紗耶"
     },
     {
@@ -8789,7 +8789,7 @@
         "live_name": "32ndSGアンダーライブ",
         "live_date": "2023年4月27日",
         "live_location": "東京ガーデンシアター",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "北川悠理"
     },
     {
@@ -8852,7 +8852,7 @@
         "live_name": "28thSG アンダーライブ",
         "live_date": "2021年10月28日",
         "live_location": "立川ステージガーデン",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "柴田柚菜"
     },
     {
@@ -9266,7 +9266,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月31日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "筒井あやめ"
     },
     {
@@ -9968,7 +9968,7 @@
         "live_name": "28thSG アンダーライブ",
         "live_date": "2021年10月28日",
         "live_location": "立川ステージガーデン",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "弓木奈於"
     },
     {
