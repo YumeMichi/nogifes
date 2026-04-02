@@ -121,7 +121,7 @@ def download_master_data() -> None:
     }
 
     ret = nogifes_request(
-        "https://v2api.nogifes.jp/1.0/initialize.php",
+        "https://v1api.nogifes.jp/1.0/initialize.php",
         initialize_body,
         "8ihNytHPB3WawDsULyDKwh5T"
     )
@@ -151,7 +151,7 @@ def download_master_data() -> None:
     }
 
     ret = nogifes_request(
-        "https://v2api.nogifes.jp/1.0/get_mstlist.php",
+        "https://v1api.nogifes.jp/1.0/get_mstlist.php",
         get_mst_body,
         "Re2485NXmdqS37nGLK29U8Nb"
     )
@@ -180,7 +180,7 @@ def download_master_data() -> None:
             print(f"{file_name} is up to date.")
             continue
 
-        url = f"https://v2static.nogifes.jp/resource/mst/{mst['file']}?ver={mst['version']}"
+        url = f"https://v1static.nogifes.jp/resource/mst/{mst['file']}?ver={mst['version']}"
 
         for i in range(3):
             try:
