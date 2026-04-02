@@ -107,17 +107,17 @@ def download_master_data() -> None:
     # initialize
     # ======================
     initialize_body = {
-        "user_token": "EZJbBbC5yaG7uRso",
+        "user_token": "hCv7Nb9q3dyPhzcp",
         "locale": "ChineseSimplified",
         "model": "Xiaomi 24031PN0DC",
         "device_name": "2206123SC",
         "os_name": "Android",
         "os_version": "12",
         "device_token": "",
-        "device_id": "c068d7e0-bcdf-4ba7-8cb0-94d8da9500881766628714",
+        "device_id": "abc0324d-b03f-433f-ac16-2c22404500621766798650",
         "application_version": APPLICATION_VERSION,
         "store_id": STORE_ID,
-        "user_id": 20426802,
+        "user_id": 20428873,
     }
 
     ret = nogifes_request(
@@ -147,7 +147,7 @@ def download_master_data() -> None:
         "application_version": APPLICATION_VERSION,
         "store_id": STORE_ID,
         "connect_key": ret["connect_key"],
-        "user_id": 20426802,
+        "user_id": 20428873,
     }
 
     ret = nogifes_request(
