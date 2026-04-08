@@ -30,5 +30,6 @@ foreach ($allData as $value) {
 }
 
 $data['unit_data'] = $unitData;
+$data['mstlist_version'] = GetMasterdataVersion();
 
 SendEncryptedResponse('GetUserAllResponse', $data);

@@ -3,10 +3,11 @@ require './utils.php';
 
 $bonusMovieData = [];
 $highQualityMovieData = [];
+$unitMovieData = [];
 
 // bonus_movie_data (UnitMaster)
-$unitList = LoadJsonFile('masterdata/UnitMaster.json');
-foreach ($unitList as $unit) {
+$unitMaster = LoadJsonFile('masterdata/UnitMaster.json');
+foreach ($unitMaster as $unit) {
     if (($unit['bonus_movie_id'] ?? 0) != 0) {
         $bonusMovieData[] = [
             'bonus_movie_type' => $unit['bonus_movie_type'] ?? 0,
@@ -16,8 +17,8 @@ foreach ($unitList as $unit) {
 }
 
 // high_quality_movie_data (FocusMovieMaster)
-$focusMovieData = LoadJsonFile('masterdata/FocusMovieMaster.json');
-foreach ($focusMovieData as $movie) {
+$focusMovieMaster = LoadJsonFile('masterdata/FocusMovieMaster.json');
+foreach ($focusMovieMaster as $movie) {
     if (($movie['high_quality'] ?? 0) == 1) {
         $highQualityMovieData[] = [
             'type' => 2,
@@ -27,8 +28,8 @@ foreach ($focusMovieData as $movie) {
 }
 
 // high_quality_movie_data (OtherMovieMaster)
-$otherMovieData = LoadJsonFile('masterdata/OtherMovieMaster.json');
-foreach ($otherMovieData as $movie) {
+$otherMovieMaster = LoadJsonFile('masterdata/OtherMovieMaster.json');
+foreach ($otherMovieMaster as $movie) {
     if (($movie['high_quality'] ?? 0) == 1) {
         $highQualityMovieData[] = [
             'type' => 3,
@@ -38,8 +39,8 @@ foreach ($otherMovieData as $movie) {
 }
 
 // high_quality_movie_data (LiveMaster)
-$liveData = LoadJsonFile('masterdata/LiveMaster.json');
-foreach ($liveData as $movie) {
+$liveMaster = LoadJsonFile('masterdata/LiveMaster.json');
+foreach ($liveMaster as $movie) {
     if (($movie['high_quality'] ?? 0) == 1) {
         $highQualityMovieData[] = [
             'type' => 1,
@@ -48,11 +49,19 @@ foreach ($liveData as $movie) {
     }
 }
 
+// unit_movie_data (UnitMovieMaster)
+$unitMovieMaster = LoadJsonFile('masterdata/UnitMovieMaster.json');
+foreach ($unitMovieMaster as $movie) {
+    $unitMovieData[] = [
+        'unit_movie_id' => $movie['unit_movie_id'] ?? 0,
+    ];
+}
+
 $data = [
     'mstlist_version' => GetMasterdataVersion(),
     'connect_key' => GetConnectKey(),
     'bonus_movie_data' => $bonusMovieData,
-    'unit_movie_data' => [],
+    'unit_movie_data' => $unitMovieData,
     'high_quality_movie_data' => $highQualityMovieData,
     'success' => true,
 ];
