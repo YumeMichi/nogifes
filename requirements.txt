@@ -1,0 +1,6 @@
+crijndael
+jaconv
+PyCriCodecs
+requests
+tqdm
+UnityPy

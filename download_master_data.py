@@ -6,10 +6,12 @@ import requests
 import secrets
 
 from pathlib import Path
+from config import API_BASE_URL, STATIC_BASE_URL
 from utils import download
 
 APPLICATION_VERSION = 21402
 STORE_ID = 2  # Android
+API_VERSION_PATH = "1.0"
 
 KEY_SIZE = 24
 BLOCK_SIZE = 32
@@ -121,7 +123,7 @@ def download_master_data() -> None:
     }
 
     ret = nogifes_request(
-        "https://v1api.nogifes.jp/1.0/initialize.php",
+        f"{API_BASE_URL}/{API_VERSION_PATH}/initialize.php",
         initialize_body,
         "8ihNytHPB3WawDsULyDKwh5T"
     )
@@ -151,7 +153,7 @@ def download_master_data() -> None:
     }
 
     ret = nogifes_request(
-        "https://v1api.nogifes.jp/1.0/get_mstlist.php",
+        f"{API_BASE_URL}/{API_VERSION_PATH}/get_mstlist.php",
         get_mst_body,
         "Re2485NXmdqS37nGLK29U8Nb"
     )
@@ -180,7 +182,7 @@ def download_master_data() -> None:
             print(f"{file_name} is up to date.")
             continue
 
-        url = f"https://v1static.nogifes.jp/resource/mst/{mst['file']}?ver={mst['version']}"
+        url = f"{STATIC_BASE_URL}/resource/mst/{mst['file']}?ver={mst['version']}"
 
         for i in range(3):
             try:

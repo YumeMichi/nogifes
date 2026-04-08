@@ -12,9 +12,9 @@ def download_unit_movie():
         movie_name = movie_data["unit_movie_name"]
         girl_name = "、".join(unit_girl_data[movie_data["unit_data"][0]["unit_id"]])
         movie_file_name = f"movie_card_{movie_data["unit_movie_id"]:05d}.usme"
-        movie_url = f"{RESOURCE_PATH['unit_movie']}{movie_file_name}"
+        movie_url = build_resource_url("unit_movie", movie_file_name)
         movie_save_name = f"{movie_name}.mp4"
-        movie_save_path = f"{DOWNLOAD_PATH["unit_movie"]}{girl_name}/{movie_save_name}"
+        movie_save_path = build_download_path("unit_movie", girl_name, movie_save_name)
 
         movie = {
             "movie_id": movie_data["unit_movie_id"],
@@ -26,7 +26,7 @@ def download_unit_movie():
             # print(f"{movie_save_name} already exists")
             continue
 
-        usme_path = os.path.join(TEMP_DIR, movie_file_name)
+        usme_path = temp_path(movie_file_name)
         if os.path.exists(usme_path):
             os.remove(usme_path)
 

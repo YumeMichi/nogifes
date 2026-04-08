@@ -13,9 +13,9 @@ def download_adventure_movie():
         if "adventure_movie" in res["filename"]:
             movie_id = res["filename"].split("_")[2][:-5]
             movie_file_name = res["filename"]
-            movie_url = f"{RESOURCE_PATH['adventure_movie']}{movie_file_name}"
+            movie_url = build_resource_url("adventure_movie", movie_file_name)
             movie_save_name = f"{movie_file_name[:-5]}.mp4"
-            movie_save_path = f"{DOWNLOAD_PATH["adventure_movie"]}{movie_save_name}"
+            movie_save_path = build_download_path("adventure_movie", movie_save_name)
 
             movie = {
                 "movie_id": movie_id,
@@ -26,7 +26,7 @@ def download_adventure_movie():
                 # print(f"{movie_save_name} already exists")
                 continue
 
-            usme_path = os.path.join(TEMP_DIR, movie_file_name)
+            usme_path = temp_path(movie_file_name)
             if os.path.exists(usme_path):
                 os.remove(usme_path)
 

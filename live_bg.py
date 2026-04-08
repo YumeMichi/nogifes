@@ -25,16 +25,16 @@ def download_live_bg():
                 bg_name = live_bg["live_bg_name"]
                 bg_high_quality = 0
                 bg_file_name = resource["filename"]
-                bg_url = f"{RESOURCE_PATH["live_bg"]}{bg_file_name}"
+                bg_url = build_resource_url("live_bg", bg_file_name)
                 if resource["resource_type"] == 33:
-                    bg_url = f"{RESOURCE_PATH["high_live_bg"]}{bg_file_name}"
+                    bg_url = build_resource_url("high_live_bg", bg_file_name)
                     bg_high_quality = 1
                 bg_save_name = f"{sanitize_filename(bg_name)}.mp4"
                 if live_bg["live_name"] != "--":
                     bg_save_name = f"{sanitize_filename(f"{bg_name} ({live_bg["live_name"]})")}.mp4"
-                bg_save_path = f"{DOWNLOAD_PATH['live_bg']}{bg_save_name}"
+                bg_save_path = build_download_path("live_bg", bg_save_name)
                 if resource["resource_type"] == 33:
-                    bg_save_path = f"{DOWNLOAD_PATH['high_live_bg']}{bg_save_name}"
+                    bg_save_path = build_download_path("high_live_bg", bg_save_name)
 
                 bg = {
                     "live_bg_id": bg_id,
@@ -46,19 +46,19 @@ def download_live_bg():
                     # print(f"{bg_save_path} already exists")
                     continue
 
-                cpk_path = os.path.join(TEMP_DIR, bg_file_name)
+                cpk_path = temp_path(bg_file_name)
                 if os.path.exists(cpk_path):
                     os.remove(cpk_path)
 
                 if download(bg_url, bg_file_name):
                     if extract_cpk(cpk_path):
-                        extracted_path = cpk_path[:-4]
-                        movie_path = f"{extracted_path}/movie"
-                        music_path = f"{extracted_path}/music"
+                        extracted_path = os.path.splitext(cpk_path)[0]
+                        movie_path = os.path.join(extracted_path, "movie")
+                        music_path = os.path.join(extracted_path, "music")
                         file_list = extract_usm(movie_path)
                         if len(file_list) > 0 and extract_acb(music_path):
                             video_path = file_list[0]
-                            audio_path = f"{TEMP_DIR}/0.wav"
+                            audio_path = temp_path("0.wav")
                             if remux_video(video_path, audio_path, bg_save_path):
                                 os.remove(video_path)
                                 os.remove(audio_path)

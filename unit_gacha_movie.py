@@ -13,9 +13,9 @@ def download_unit_gacha_movie():
             movie_name = unit["unit_name"]
             girl_name = "、".join(unit_girl_data[unit["unit_id"]])
             movie_file_name = f"unit_gacha_movie_{unit["unit_id"]:07d}.usme"
-            movie_url = f"{RESOURCE_PATH['unit_gacha_movie']}{movie_file_name}"
+            movie_url = build_resource_url("unit_gacha_movie", movie_file_name)
             movie_save_name = f"{movie_name}.mp4"
-            movie_save_path = f"{DOWNLOAD_PATH["unit_gacha_movie"]}{girl_name}/{movie_save_name}"
+            movie_save_path = build_download_path("unit_gacha_movie", girl_name, movie_save_name)
 
             movie = {
                 "movie_id": unit["unit_id"],
@@ -27,7 +27,7 @@ def download_unit_gacha_movie():
                 # print(f"{movie_save_name} already exists")
                 continue
 
-            usme_path = os.path.join(TEMP_DIR, movie_file_name)
+            usme_path = temp_path(movie_file_name)
             if os.path.exists(usme_path):
                 os.remove(usme_path)
 

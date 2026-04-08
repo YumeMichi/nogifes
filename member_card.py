@@ -14,9 +14,9 @@ def download_member_card():
         card_id = f"{unit["unit_id"]:07d}"
         card_file_name = f"card_{card_id}"
         card_l_file_name = f"card_l_{card_id}"
-        card_url = f"{RESOURCE_PATH["asset_bundle"]}card/{card_id}/{card_file_name}"
-        card_l_url = f"{RESOURCE_PATH["asset_bundle"]}card/{card_id}/{card_l_file_name}"
-        card_save_path = f"{DOWNLOAD_PATH["member_card"]}{girl_name}/{card_id}"
+        card_url = build_resource_url("asset_bundle", "card", card_id, card_file_name)
+        card_l_url = build_resource_url("asset_bundle", "card", card_id, card_l_file_name)
+        card_save_path = build_download_path("member_card", girl_name, card_id)
 
         # card = {
         #     "card_id": unit["unit_id"],
@@ -26,11 +26,11 @@ def download_member_card():
         # }
         # print(card)
 
-        card_path = os.path.join(TEMP_DIR, card_file_name)
+        card_path = temp_path(card_file_name)
         if os.path.exists(card_path):
             os.remove(card_path)
 
-        card_l_path = os.path.join(TEMP_DIR, card_l_file_name)
+        card_l_path = temp_path(card_l_file_name)
         if os.path.exists(card_l_path):
             os.remove(card_l_path)
 
