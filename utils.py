@@ -76,7 +76,10 @@ def temp_path(*parts: str) -> str:
     return str(TEMP_DIR.joinpath(*(str(part) for part in parts)))
 
 def _normalize_stream_filename(stream_file_name: str) -> str:
-    path_value = stream_file_name.replace("\\", "/")
+    # USM metadata may escape "#" as "\#". This should stay in filename.
+    path_value = stream_file_name.replace("\\#", "#")
+    path_value = path_value.replace("\\", "/")
+    path_value = re.sub(r"/+", "/", path_value)
     if len(path_value) > 1 and path_value[1] == ":":
         path_value = path_value[2:]
     return path_value.lstrip("/")
@@ -106,12 +109,18 @@ def _stream_path_candidates(stream_file_name: str) -> list[Path]:
     return uniq_candidates
 
 def _resolve_stream_output_path(stream_file_name: str) -> str:
+    normalized = _normalize_stream_filename(stream_file_name)
+    if normalized:
+        # Some extractors keep Windows-style path separators in the filename itself.
+        literal_windows_path = TEMP_DIR / normalized.replace("/", "\\")
+        if literal_windows_path.exists():
+            return str(literal_windows_path)
+
     candidates = _stream_path_candidates(stream_file_name)
     for candidate in candidates:
         if candidate.exists():
             return str(candidate)
 
-    normalized = _normalize_stream_filename(stream_file_name)
     file_name = Path(normalized).name if normalized else ""
     if file_name:
         for candidate in TEMP_DIR.rglob(file_name):
