@@ -173,5 +173,20 @@
         "movie_id": 129250,
         "movie_name": "Mystic Reverie",
         "girl_name": "長嶋凛桜、矢田萌華"
+    },
+    {
+        "movie_id": 130010,
+        "movie_name": "魔法少女こうりんっ！",
+        "girl_name": "伊藤理々杏、佐藤璃果"
+    },
+    {
+        "movie_id": 130020,
+        "movie_name": "魔法少女こうりんっ！",
+        "girl_name": "遠藤さくら、筒井あやめ"
+    },
+    {
+        "movie_id": 130030,
+        "movie_name": "魔法少女こうりんっ！",
+        "girl_name": "岡本姫奈、菅原咲月"
     }
 ]

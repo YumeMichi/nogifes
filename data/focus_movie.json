@@ -3407,7 +3407,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "和田まあや"
     },
     {
@@ -5207,7 +5207,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "伊藤理々杏"
     },
     {
@@ -6368,7 +6368,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "阪口珠美"
     },
     {
@@ -9509,7 +9509,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月31日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "矢久保美緒"
     },
     {
@@ -9851,7 +9851,7 @@
         "live_name": "真夏の全国ツアー2022",
         "live_date": "2022年7月30日",
         "live_location": "マリンメッセ福岡",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "松尾美佑"
     },
     {
@@ -11203,5 +11203,50 @@
         "live_location": "横浜BUNTAI",
         "high_quality": 1,
         "girl_name": "林瑠奈"
+    },
+    {
+        "movie_id": 1251,
+        "movie_name": "世界一のダイヤモンド",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1253,
+        "movie_name": "自惚れビーチ",
+        "live_name": "真夏の全国ツアー2024",
+        "live_date": "2024年8月24日",
+        "live_location": "バンテリンドーム ナゴヤ",
+        "high_quality": 1,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1254,
+        "movie_name": "人は夢を二度見る",
+        "live_name": "真夏の全国ツアー2023",
+        "live_date": "2023年8月14日",
+        "live_location": "セキスイハイムスーパーアリーナ",
+        "high_quality": 1,
+        "girl_name": "遠藤さくら"
+    },
+    {
+        "movie_id": 1252,
+        "movie_name": "世界一のダイヤモンド",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "菅原咲月"
+    },
+    {
+        "movie_id": 1255,
+        "movie_name": "なぜ　僕たちは走るのか？",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "大越ひなの"
     }
 ]
