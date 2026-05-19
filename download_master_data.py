@@ -11,7 +11,7 @@ from typing import Any
 from config import API_BASE_URL, STATIC_BASE_URL
 from utils import download
 
-APPLICATION_VERSION = 21402
+APPLICATION_VERSION = 21500
 STORE_ID = 2  # Android
 API_VERSION_PATH = "1.0"
 

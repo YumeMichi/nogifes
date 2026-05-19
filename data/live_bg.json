@@ -932,7 +932,7 @@
     {
         "live_bg_id": 330041,
         "live_bg_name": "もしも心が透明なら",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 330071,
@@ -1747,6 +1747,11 @@
     {
         "live_bg_id": 450071,
         "live_bg_name": "君と猫",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 470011,
+        "live_bg_name": "My respect",
         "live_bg_has_high_quality": 0
     }
 ]
