@@ -188,5 +188,20 @@
         "movie_id": 130030,
         "movie_name": "魔法少女こうりんっ！",
         "girl_name": "岡本姫奈、菅原咲月"
+    },
+    {
+        "movie_id": 132230,
+        "movie_name": "Noble Grace",
+        "girl_name": "梅澤美波、五百城茉央"
+    },
+    {
+        "movie_id": 132240,
+        "movie_name": "Noble Grace",
+        "girl_name": "池田瑛紗、中西アルノ"
+    },
+    {
+        "movie_id": 132250,
+        "movie_name": "Noble Grace",
+        "girl_name": "愛宕心響、川端晃菜"
     }
 ]

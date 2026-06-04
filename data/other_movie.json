@@ -373,7 +373,7 @@
         "live_name": "Sing Out！発売記念ライブ",
         "live_date": "2019年5月25日",
         "live_location": "横浜アリーナ",
-        "high_quality": 0
+        "high_quality": 1
     },
     {
         "movie_id": 49,
@@ -1110,5 +1110,21 @@
         "live_date": "2026年2月22日",
         "live_location": "有明アリーナ",
         "high_quality": 0
+    },
+    {
+        "movie_id": 142,
+        "movie_name": "ガールズルール_真夏の全国ツアー2025",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 1
+    },
+    {
+        "movie_id": 143,
+        "movie_name": "裸足でSummer_真夏の全国ツアー2025",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 1
     }
 ]

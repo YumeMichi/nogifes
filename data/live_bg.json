@@ -777,7 +777,7 @@
     {
         "live_bg_id": 270031,
         "live_bg_name": "キスの手裏剣",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 270041,
@@ -1752,6 +1752,11 @@
     {
         "live_bg_id": 470011,
         "live_bg_name": "My respect",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 90000861,
+        "live_bg_name": "ありがちな恋愛 -真夏の全国ツアー2025 ver-",
         "live_bg_has_high_quality": 0
     }
 ]
