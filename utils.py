@@ -28,6 +28,7 @@ RESOURCE_PATH = {
     "unit_movie": f"{STATIC_BASE_URL}/resource/Movie/MovieCard/",
     "unit_gacha_movie": f"{STATIC_BASE_URL}/resource/Movie/UnitGachaMovie/",
     "live_finish_movie": f"{STATIC_BASE_URL}/resource/Movie/LiveFinishMovie/",
+    "splash_movie": f"{STATIC_BASE_URL}/resource/Splash/Movie/",
 }
 
 DOWNLOAD_PATH = {
@@ -46,6 +47,7 @@ DOWNLOAD_PATH = {
     "unit_movie": DOWNLOAD_ROOT / "unit_movie",
     "unit_gacha_movie": DOWNLOAD_ROOT / "unit_gacha_movie",
     "live_finish_movie": DOWNLOAD_ROOT / "live_finish_movie",
+    "splash_movie": DOWNLOAD_ROOT / "splash_movie",
 }
 
 FILENAME_REPLACEMENTS = {

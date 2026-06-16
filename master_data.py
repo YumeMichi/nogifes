@@ -92,3 +92,6 @@ def get_other_movie_list() -> list[Any]:
 
 def get_unit_movie_list() -> list[Any]:
     return load_master_data("UnitMovieMaster")
+
+def get_splash_movie_list() -> list[Any]:
+    return load_master_data("SplashMaster")

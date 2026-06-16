@@ -1,0 +1,90 @@
+[
+    {
+        "movie_id": 1,
+        "movie_name": "splash_movie_00001"
+    },
+    {
+        "movie_id": 2,
+        "movie_name": "splash_movie_00002"
+    },
+    {
+        "movie_id": 5,
+        "movie_name": "splash_movie_00005"
+    },
+    {
+        "movie_id": 6,
+        "movie_name": "splash_movie_00006"
+    },
+    {
+        "movie_id": 7,
+        "movie_name": "splash_movie_00007"
+    },
+    {
+        "movie_id": 8,
+        "movie_name": "splash_movie_00008"
+    },
+    {
+        "movie_id": 9,
+        "movie_name": "splash_movie_00009"
+    },
+    {
+        "movie_id": 10,
+        "movie_name": "splash_movie_00010"
+    },
+    {
+        "movie_id": 11,
+        "movie_name": "splash_movie_00011"
+    },
+    {
+        "movie_id": 13,
+        "movie_name": "splash_movie_00013"
+    },
+    {
+        "movie_id": 14,
+        "movie_name": "splash_movie_00014"
+    },
+    {
+        "movie_id": 15,
+        "movie_name": "splash_movie_00015"
+    },
+    {
+        "movie_id": 26,
+        "movie_name": "splash_movie_00026"
+    },
+    {
+        "movie_id": 27,
+        "movie_name": "splash_movie_00027"
+    },
+    {
+        "movie_id": 30,
+        "movie_name": "splash_movie_00030"
+    },
+    {
+        "movie_id": 32,
+        "movie_name": "splash_movie_00032"
+    },
+    {
+        "movie_id": 34,
+        "movie_name": "splash_movie_00034"
+    },
+    {
+        "movie_id": 43,
+        "movie_name": "splash_movie_00043"
+    },
+    {
+        "movie_id": 45,
+        "movie_name": "splash_movie_00045"
+    },
+    {
+        "movie_id": 48,
+        "movie_name": "splash_movie_00048"
+    },
+    {
+        "movie_id": 49,
+        "movie_name": "splash_movie_00049"
+    },
+    {
+        "movie_id": 50,
+        "movie_name": "splash_movie_00050"
+    }
+]
