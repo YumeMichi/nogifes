@@ -1076,7 +1076,7 @@
         "live_name": "Sing Out！発売記念ライブ",
         "live_date": "2019年5月26日",
         "live_location": "横浜アリーナ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "齋藤飛鳥"
     },
     {
@@ -1850,7 +1850,7 @@
         "live_name": "Sing Out！発売記念ライブ",
         "live_date": "2019年5月26日",
         "live_location": "横浜アリーナ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "白石麻衣"
     },
     {
@@ -6881,7 +6881,7 @@
         "live_name": "28thSG アンダーライブ",
         "live_date": "2021年10月28日",
         "live_location": "立川ステージガーデン",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "向井葉月"
     },
     {
@@ -7484,7 +7484,7 @@
         "live_name": "28thSG アンダーライブ",
         "live_date": "2021年10月28日",
         "live_location": "立川ステージガーデン",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "吉田綾乃クリスティー"
     },
     {
@@ -11284,5 +11284,95 @@
         "live_location": "横浜BUNTAI",
         "high_quality": 0,
         "girl_name": "佐藤璃果"
+    },
+    {
+        "movie_id": 1260,
+        "movie_name": "チャンスは平等",
+        "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
+        "live_date": "2026年2月22日",
+        "live_location": "有明アリーナ",
+        "high_quality": 0,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1261,
+        "movie_name": "トキトキメキメキ",
+        "live_name": "真夏の全国ツアー2024",
+        "live_date": "2024年8月25日",
+        "live_location": "バンテリンドーム ナゴヤ",
+        "high_quality": 1,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1262,
+        "movie_name": "真夏日よ",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1263,
+        "movie_name": "三番目の風",
+        "live_name": "真夏の全国ツアー2024",
+        "live_date": "2024年8月24日",
+        "live_location": "バンテリンドーム ナゴヤ",
+        "high_quality": 1,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1264,
+        "movie_name": "Monopoly",
+        "live_name": "真夏の全国ツアー2024",
+        "live_date": "2024年8月25日",
+        "live_location": "バンテリンドーム ナゴヤ",
+        "high_quality": 1,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1265,
+        "movie_name": "ガールズルール",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 1,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1266,
+        "movie_name": "ショパンの嘘つき",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "梅澤美波"
+    },
+    {
+        "movie_id": 1267,
+        "movie_name": "Same numbers",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "賀喜遥香"
+    },
+    {
+        "movie_id": 1268,
+        "movie_name": "Same numbers",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "一ノ瀬美空"
+    },
+    {
+        "movie_id": 1269,
+        "movie_name": "Same numbers",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月16日",
+        "live_location": "大阪城ホール",
+        "high_quality": 0,
+        "girl_name": "川﨑桜"
     }
 ]

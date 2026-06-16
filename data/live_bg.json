@@ -807,7 +807,7 @@
     {
         "live_bg_id": 280031,
         "live_bg_name": "のような存在",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 280041,
@@ -1757,6 +1757,11 @@
     {
         "live_bg_id": 90000861,
         "live_bg_name": "ありがちな恋愛 -真夏の全国ツアー2025 ver-",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 450011,
+        "live_bg_name": "Same numbers",
         "live_bg_has_high_quality": 0
     }
 ]
