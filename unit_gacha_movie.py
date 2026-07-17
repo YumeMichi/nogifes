@@ -1,45 +1,31 @@
-from focus_movie import update_movie_data
-from master_data import *
-from utils import *
+from master_data import get_unit_girl_list, get_unit_list
+from utils import (
+    build_download_path,
+    build_resource_url,
+    download_usm_movie,
+    update_json_record,
+)
 
-UNIT_MOVIE_DATA_PATH = "data/unit_gacha_movie.json"
+UNIT_GACHA_MOVIE_DATA_PATH = "data/unit_gacha_movie.json"
 
-def download_unit_gacha_movie():
-    unit_data = get_unit_list()
+
+def download_unit_gacha_movie() -> None:
     unit_girl_data = get_unit_girl_list()
+    for unit in get_unit_list():
+        if unit["gacha_movie"] != 1:
+            continue
 
-    for unit in unit_data:
-        if unit["gacha_movie"] == 1:
-            movie_name = unit["unit_name"]
-            girl_name = "、".join(unit_girl_data[unit["unit_id"]])
-            movie_file_name = f"unit_gacha_movie_{unit["unit_id"]:07d}.usme"
-            movie_url = build_resource_url("unit_gacha_movie", movie_file_name)
-            movie_save_name = f"{movie_name}.mp4"
-            movie_save_path = build_download_path("unit_gacha_movie", girl_name, movie_save_name)
+        movie_name = unit["unit_name"]
+        girl_name = "、".join(unit_girl_data[unit["unit_id"]])
+        movie_file_name = f"unit_gacha_movie_{unit['unit_id']:07d}.usme"
+        movie_url = build_resource_url("unit_gacha_movie", movie_file_name)
+        movie_save_name = f"{movie_name}.mp4"
+        movie_save_path = build_download_path("unit_gacha_movie", girl_name, movie_save_name)
+        movie = {"movie_id": unit["unit_id"], "movie_name": movie_name, "girl_name": girl_name}
 
-            movie = {
-                "movie_id": unit["unit_id"],
-                "movie_name": movie_name,
-                "girl_name": girl_name,
-            }
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, include_audio=False):
+            update_json_record(UNIT_GACHA_MOVIE_DATA_PATH, movie, "movie_id")
 
-            if os.path.exists(movie_save_path):
-                # print(f"{movie_save_name} already exists")
-                continue
 
-            usme_path = temp_path(movie_file_name)
-            if os.path.exists(usme_path):
-                os.remove(usme_path)
-
-            if download(movie_url, movie_file_name):
-                file_list = extract_usm(usme_path)
-                if len(file_list) > 0:
-                    video_path = file_list[0]
-                    if remux_video(video_path, None, movie_save_path):
-                        os.remove(video_path)
-                        os.remove(usme_path)
-                        update_movie_data(UNIT_MOVIE_DATA_PATH, movie)
-                        print(f"Successfully extracted {movie_save_name}")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     download_unit_gacha_movie()

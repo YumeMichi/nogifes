@@ -1,63 +1,51 @@
 import re
 
-from focus_movie import update_movie_data
-from master_data import *
-from utils import *
+from master_data import get_reward_movie_list, get_unit_girl_list
+from utils import (
+    build_download_path,
+    build_resource_url,
+    download_usm_movie,
+    normalize_unicode,
+    sanitize_filename,
+    update_json_record,
+)
 
 REWARD_MOVIE_DATA_PATH = "data/reward_movie.json"
 
-def download_reward_movie():
-    reward_movie_data = get_reward_movie_list()
+
+def _display_movie_name(raw_name: str) -> str:
+    movie_name_parts = raw_name.split("<br />")
+    if len(movie_name_parts) > 1:
+        sub_movie_name, main_movie_name = movie_name_parts
+        movie_name = f"{main_movie_name} ({sub_movie_name.replace('全ツ', '真夏の全国ツアー')})"
+    else:
+        movie_name = movie_name_parts[0].replace("全ツ", "真夏の全国ツアー")
+
+    return re.sub(
+        r"\[F\]|\s*SP(?: MOVIE|フルフォーカスMOVIE|ライブフォーカスMOVIE|ライブMOVIE|ﾌﾙﾌｫｰｶｽMOVIE|ﾌｫｰｶｽMOVIE)",
+        "",
+        movie_name,
+    )
+
+
+def download_reward_movie() -> None:
     unit_girl_data = get_unit_girl_list()
-
-    for movie_data in reward_movie_data:
+    for movie_data in get_reward_movie_list():
         girl_name = "、".join(unit_girl_data[movie_data["unit_data"][0]["unit_id"]])
-
-        movie_name_parts = movie_data["reward_movie_name"].split("<br />")
-        if len(movie_name_parts) > 1:
-            sub_movie_name, main_movie_name = movie_data["reward_movie_name"].split("<br />")
-            sub_movie_name = sub_movie_name.replace("全ツ", "真夏の全国ツアー")
-            movie_name = f"{main_movie_name} ({sub_movie_name})"
-        else:
-            movie_name = movie_name_parts[0].replace("全ツ", "真夏の全国ツアー")
-
-        movie_name = re.sub(
-            r"\[F\]|\s*SP(?: MOVIE|フルフォーカスMOVIE|ライブフォーカスMOVIE|ライブMOVIE|ﾌﾙﾌｫｰｶｽMOVIE|ﾌｫｰｶｽMOVIE)",
-            "",
-            movie_name
-        )
-
-        movie_file_name = f"reward_movie_{movie_data["reward_movie_id"]:05d}.usme"
+        movie_name = _display_movie_name(movie_data["reward_movie_name"])
+        movie_file_name = f"reward_movie_{movie_data['reward_movie_id']:05d}.usme"
         movie_url = build_resource_url("reward_movie", movie_file_name)
         movie_save_name = f"{sanitize_filename(movie_name)}.mp4"
         movie_save_path = build_download_path("reward_movie", girl_name, movie_save_name)
-
         movie = {
             "movie_id": movie_data["reward_movie_id"],
             "movie_name": normalize_unicode(movie_data["reward_movie_name"]),
             "girl_name": girl_name,
         }
 
-        if os.path.exists(movie_save_path):
-            # print(f"{movie_save_name} already exists")
-            continue
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path):
+            update_json_record(REWARD_MOVIE_DATA_PATH, movie, "movie_id")
 
-        usme_path = temp_path(movie_file_name)
-        if os.path.exists(usme_path):
-            os.remove(usme_path)
 
-        if download(movie_url, movie_file_name):
-            file_list = extract_usm(usme_path)
-            if len(file_list) > 0:
-                video_path = file_list[0]
-                audio_path = file_list[1] if len(file_list) > 1 else None
-                if remux_video(video_path, audio_path, movie_save_path):
-                    os.remove(video_path)
-                    if audio_path:
-                        os.remove(audio_path)
-                    os.remove(usme_path)
-                    update_movie_data(REWARD_MOVIE_DATA_PATH, movie)
-                    print(f"Successfully extracted {movie_save_name}")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     download_reward_movie()

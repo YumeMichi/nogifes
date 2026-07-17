@@ -1,9 +1,11 @@
 import datetime
 import functools
 import jaconv
+import json
 import os
 import re
 import requests
+import shutil
 import subprocess
 import tqdm
 import UnityPy
@@ -276,6 +278,97 @@ def remux_video(video_path: str, audio_path: str | None, output_path: str) -> bo
     except (FileNotFoundError, subprocess.CalledProcessError, OSError) as e:
         print(f"{video_path} remux failed: {e}")
         return False
+
+def _remove_file(path: str | Path) -> None:
+    Path(path).unlink(missing_ok=True)
+
+def download_usm_movie(
+    url: str,
+    archive_name: str,
+    output_path: str | Path,
+    *,
+    include_audio: bool = True,
+    require_audio: bool = False,
+) -> bool:
+    """Download a USME file, remux its streams, and clean up on success."""
+    destination = Path(output_path)
+    if destination.exists():
+        return False
+
+    archive_path = TEMP_DIR / archive_name
+    _remove_file(archive_path)
+    if not download(url, archive_name):
+        return False
+
+    stream_paths = extract_usm(str(archive_path))
+    if not stream_paths:
+        return False
+
+    video_path = stream_paths[0]
+    audio_path = stream_paths[1] if include_audio and len(stream_paths) > 1 else None
+    if require_audio and audio_path is None:
+        print(f"{archive_path} does not contain an audio stream")
+        return False
+
+    if not remux_video(video_path, audio_path, str(destination)):
+        return False
+
+    _remove_file(video_path)
+    if audio_path is not None:
+        _remove_file(audio_path)
+    _remove_file(archive_path)
+    print(f"Successfully extracted {destination.name}")
+    return True
+
+def download_cpk_movie(url: str, archive_name: str, output_path: str | Path) -> bool:
+    """Download a CPK movie bundle, remux it, and clean up on success."""
+    destination = Path(output_path)
+    if destination.exists():
+        return False
+
+    archive_path = TEMP_DIR / archive_name
+    _remove_file(archive_path)
+    if not download(url, archive_name) or not extract_cpk(str(archive_path)):
+        return False
+
+    extracted_path = archive_path.with_suffix("")
+    stream_paths = extract_usm(str(extracted_path / "movie"))
+    audio_path = TEMP_DIR / "0.wav"
+    if not stream_paths or not extract_acb(str(extracted_path / "music")):
+        return False
+
+    if not remux_video(stream_paths[0], str(audio_path), str(destination)):
+        return False
+
+    _remove_file(stream_paths[0])
+    _remove_file(audio_path)
+    _remove_file(archive_path)
+    shutil.rmtree(extracted_path, ignore_errors=True)
+    print(f"Successfully extracted {destination.name}")
+    return True
+
+def update_json_record(json_path: str | Path, record: dict, identifier_key: str) -> None:
+    """Upsert a downloaded asset record while retaining the existing JSON format."""
+    path = Path(json_path)
+    data: list[dict] = []
+    if path.exists():
+        try:
+            loaded_data = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(loaded_data, list):
+                data = loaded_data
+        except json.JSONDecodeError:
+            pass
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+    for index, item in enumerate(data):
+        if item.get(identifier_key) == record[identifier_key]:
+            data[index] = record
+            break
+    else:
+        data.append(record)
+
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=4) + "\n", encoding="utf-8")
 
 def write_complete(dir_path: str):
     with open(Path(dir_path) / ".complete", "w") as f:

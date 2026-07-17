@@ -1,60 +1,43 @@
-import shutil
-
-from focus_movie import update_movie_data
-from master_data import *
-from utils import *
+from master_data import get_other_movie_list
+from utils import (
+    build_download_path,
+    build_resource_url,
+    download_cpk_movie,
+    normalize_unicode,
+    sanitize_filename,
+    update_json_record,
+)
 
 OTHER_MOVIE_DATA_PATH = "data/other_movie.json"
 
-def download_other_movie():
-    other_movie_data = get_other_movie_list()
 
-    for movie_data in other_movie_data:
+def download_other_movie() -> None:
+    for movie_data in get_other_movie_list():
         movie_id = movie_data["other_movie_id"]
         movie_name = movie_data["other_movie_name"].split("_")[0]
         movie_file_name = f"other_data_{movie_id:05d}.cpk"
-        movie_url = build_resource_url("other_movie", movie_file_name)
-        movie_save_name = f"{sanitize_filename(f"{movie_name} ({movie_data["live_name"]})")}.mp4"
-        movie_save_path = build_download_path("other_movie", movie_save_name)
+        resource_key = "other_movie"
+        display_name = f"{movie_name} ({movie_data['live_name']})"
+        movie_save_name = f"{sanitize_filename(display_name)}.mp4"
 
         if movie_data["high_quality"] == 1:
             movie_file_name = f"other_data_high_{movie_id:05d}.cpk"
-            movie_url = build_resource_url("high_other_movie", movie_file_name)
-            movie_save_path = build_download_path("high_other_movie", movie_save_name)
+            resource_key = "high_other_movie"
 
+        movie_url = build_resource_url(resource_key, movie_file_name)
+        movie_save_path = build_download_path(resource_key, movie_save_name)
         movie = {
-            'movie_id': movie_id,
-            'movie_name': movie_data["other_movie_name"],
-            'live_name': movie_data["live_name"],
-            'live_date': movie_data["live_date"],
-            'live_location': normalize_unicode(movie_data["live_location"]),
-            'high_quality': movie_data["high_quality"],
+            "movie_id": movie_id,
+            "movie_name": movie_data["other_movie_name"],
+            "live_name": movie_data["live_name"],
+            "live_date": movie_data["live_date"],
+            "live_location": normalize_unicode(movie_data["live_location"]),
+            "high_quality": movie_data["high_quality"],
         }
 
-        if os.path.exists(movie_save_path):
-            # print(f"{movie_save_name} already exists")
-            continue
+        if download_cpk_movie(movie_url, movie_file_name, movie_save_path):
+            update_json_record(OTHER_MOVIE_DATA_PATH, movie, "movie_id")
 
-        cpk_path = temp_path(movie_file_name)
-        if os.path.exists(cpk_path):
-            os.remove(cpk_path)
 
-        if download(movie_url, movie_file_name):
-            if extract_cpk(cpk_path):
-                extracted_path = os.path.splitext(cpk_path)[0]
-                movie_path = os.path.join(extracted_path, "movie")
-                music_path = os.path.join(extracted_path, "music")
-                file_list = extract_usm(movie_path)
-                if len(file_list) > 0 and extract_acb(music_path):
-                    video_path = file_list[0]
-                    audio_path = temp_path("0.wav")
-                    if remux_video(video_path, audio_path, movie_save_path):
-                        os.remove(video_path)
-                        os.remove(audio_path)
-                        os.remove(cpk_path)
-                        shutil.rmtree(extracted_path)
-                        update_movie_data(OTHER_MOVIE_DATA_PATH, movie)
-                        print(f"Successfully extracted {movie_save_name}")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     download_other_movie()
