@@ -5,8 +5,10 @@ from utils import (
     build_download_path,
     build_resource_url,
     download_usm_movie,
+    load_download_records,
     normalize_unicode,
     sanitize_filename,
+    should_download_record,
     update_json_record,
 )
 
@@ -30,6 +32,7 @@ def _display_movie_name(raw_name: str) -> str:
 
 def download_reward_movie() -> None:
     unit_girl_data = get_unit_girl_list()
+    downloaded_movies = load_download_records(REWARD_MOVIE_DATA_PATH, "movie_id")
     for movie_data in get_reward_movie_list():
         girl_name = "、".join(unit_girl_data[movie_data["unit_data"][0]["unit_id"]])
         movie_name = _display_movie_name(movie_data["reward_movie_name"])
@@ -43,8 +46,12 @@ def download_reward_movie() -> None:
             "girl_name": girl_name,
         }
 
+        if not should_download_record(downloaded_movies, movie, "movie_id"):
+            continue
+
         if download_usm_movie(movie_url, movie_file_name, movie_save_path):
             update_json_record(REWARD_MOVIE_DATA_PATH, movie, "movie_id")
+            downloaded_movies[movie["movie_id"]] = movie
 
 
 if __name__ == "__main__":

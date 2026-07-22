@@ -3,7 +3,9 @@ from utils import (
     build_download_path,
     build_resource_url,
     download_cpk_movie,
+    load_download_records,
     sanitize_filename,
+    should_download_record,
     update_json_record,
 )
 
@@ -13,6 +15,7 @@ LIVE_BG_DATA_PATH = "data/live_bg.json"
 
 def download_live_bg() -> None:
     resources_by_background: dict[int, list[dict]] = {}
+    downloaded_backgrounds = load_download_records(LIVE_BG_DATA_PATH, "live_bg_id")
     for resource in get_resource_list():
         if resource["resource_type"] in LIVE_BG_RESOURCE_TYPE:
             resources_by_background.setdefault(resource["sub_id"], []).append(resource)
@@ -39,8 +42,17 @@ def download_live_bg() -> None:
                 "live_bg_has_high_quality": int(is_high_quality),
             }
 
+            if not should_download_record(
+                downloaded_backgrounds,
+                bg,
+                "live_bg_id",
+                quality_key="live_bg_has_high_quality",
+            ):
+                continue
+
             if download_cpk_movie(bg_url, bg_file_name, bg_save_path):
                 update_json_record(LIVE_BG_DATA_PATH, bg, "live_bg_id")
+                downloaded_backgrounds[bg["live_bg_id"]] = bg
 
 
 if __name__ == "__main__":

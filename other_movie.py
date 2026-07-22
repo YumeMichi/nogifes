@@ -3,8 +3,10 @@ from utils import (
     build_download_path,
     build_resource_url,
     download_cpk_movie,
+    load_download_records,
     normalize_unicode,
     sanitize_filename,
+    should_download_record,
     update_json_record,
 )
 
@@ -12,6 +14,7 @@ OTHER_MOVIE_DATA_PATH = "data/other_movie.json"
 
 
 def download_other_movie() -> None:
+    downloaded_movies = load_download_records(OTHER_MOVIE_DATA_PATH, "movie_id")
     for movie_data in get_other_movie_list():
         movie_id = movie_data["other_movie_id"]
         movie_name = movie_data["other_movie_name"].split("_")[0]
@@ -35,8 +38,14 @@ def download_other_movie() -> None:
             "high_quality": movie_data["high_quality"],
         }
 
+        if not should_download_record(
+            downloaded_movies, movie, "movie_id", quality_key="high_quality"
+        ):
+            continue
+
         if download_cpk_movie(movie_url, movie_file_name, movie_save_path):
             update_json_record(OTHER_MOVIE_DATA_PATH, movie, "movie_id")
+            downloaded_movies[movie["movie_id"]] = movie
 
 
 if __name__ == "__main__":

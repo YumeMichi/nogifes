@@ -347,6 +347,48 @@ def download_cpk_movie(url: str, archive_name: str, output_path: str | Path) -> 
     print(f"Successfully extracted {destination.name}")
     return True
 
+def load_download_records(json_path: str | Path, identifier_key: str) -> dict[object, dict]:
+    """Return previously downloaded records indexed by their identifier."""
+    path = Path(json_path)
+    if not path.exists():
+        return {}
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    if not isinstance(data, list):
+        return {}
+
+    return {
+        item[identifier_key]: item
+        for item in data
+        if isinstance(item, dict) and identifier_key in item
+    }
+
+def should_download_record(
+    records: dict[object, dict],
+    record: dict,
+    identifier_key: str,
+    *,
+    quality_key: str | None = None,
+) -> bool:
+    """Decide whether a movie should be downloaded from its JSON history.
+
+    A matching non-quality record has already been downloaded.  For records
+    with a quality field, a previous high-quality download is final; a
+    low-quality record is retried only when the quality has changed.
+    """
+    existing = records.get(record[identifier_key])
+    if existing is None:
+        return True
+    if quality_key is None:
+        return False
+
+    existing_quality = existing.get(quality_key)
+    return existing_quality != 1 and existing_quality != record.get(quality_key)
+
 def update_json_record(json_path: str | Path, record: dict, identifier_key: str) -> None:
     """Upsert a downloaded asset record while retaining the existing JSON format."""
     path = Path(json_path)

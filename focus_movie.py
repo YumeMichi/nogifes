@@ -12,8 +12,10 @@ from utils import (
     build_resource_url,
     download_cpk_movie,
     download_usm_movie,
+    load_download_records,
     normalize_unicode,
     sanitize_filename,
+    should_download_record,
     update_json_record,
 )
 
@@ -27,6 +29,7 @@ def download_focus_movie(girl_id: int) -> None:
         return
 
     match_index = 0
+    downloaded_movies = load_download_records(FOCUS_MOVIE_DATA_PATH, "movie_id")
     for unit in get_unit_by_girl_id(girl_id):
         if "[F]" not in unit["unit_name"] or unit["rarity"] % 2 != 1:
             continue
@@ -57,8 +60,14 @@ def download_focus_movie(girl_id: int) -> None:
             "girl_name": girl_data["girl_name"],
         }
 
+        if not should_download_record(
+            downloaded_movies, movie, "movie_id", quality_key="high_quality"
+        ):
+            continue
+
         if download_cpk_movie(movie_url, movie_file_name, movie_save_path):
             update_json_record(FOCUS_MOVIE_DATA_PATH, movie, "movie_id")
+            downloaded_movies[movie["movie_id"]] = movie
 
 
 def download_reward_focus_movie(girl_id: int) -> None:
@@ -66,6 +75,7 @@ def download_reward_focus_movie(girl_id: int) -> None:
     if girl_data is None:
         return
 
+    downloaded_movies = load_download_records(REWARD_FOCUS_MOVIE_DATA_PATH, "movie_id")
     for unit in get_unit_by_girl_id(girl_id):
         movie_data = get_reward_movie_by_unit_id(unit["unit_id"])
         if movie_data is None or "[F]" not in movie_data["reward_movie_name"]:
@@ -94,8 +104,12 @@ def download_reward_focus_movie(girl_id: int) -> None:
             "girl_name": girl_data["girl_name"],
         }
 
+        if not should_download_record(downloaded_movies, movie, "movie_id"):
+            continue
+
         if download_usm_movie(movie_url, movie_file_name, movie_save_path):
             update_json_record(REWARD_FOCUS_MOVIE_DATA_PATH, movie, "movie_id")
+            downloaded_movies[movie["movie_id"]] = movie
 
 
 if __name__ == "__main__":
