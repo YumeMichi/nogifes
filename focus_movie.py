@@ -23,7 +23,7 @@ FOCUS_MOVIE_DATA_PATH = "data/focus_movie.json"
 REWARD_FOCUS_MOVIE_DATA_PATH = "data/reward_focus_movie.json"
 
 
-def download_focus_movie(girl_id: int) -> None:
+def download_focus_movie(girl_id: int, *, force: bool = False) -> None:
     girl_data = get_girl_by_girl_id(girl_id)
     if girl_data is None:
         return
@@ -60,17 +60,17 @@ def download_focus_movie(girl_id: int) -> None:
             "girl_name": girl_data["girl_name"],
         }
 
-        if not should_download_record(
+        if not force and not should_download_record(
             downloaded_movies, movie, "movie_id", quality_key="high_quality"
         ):
             continue
 
-        if download_cpk_movie(movie_url, movie_file_name, movie_save_path):
+        if download_cpk_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(FOCUS_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 
 
-def download_reward_focus_movie(girl_id: int) -> None:
+def download_reward_focus_movie(girl_id: int, *, force: bool = False) -> None:
     girl_data = get_girl_by_girl_id(girl_id)
     if girl_data is None:
         return
@@ -104,10 +104,10 @@ def download_reward_focus_movie(girl_id: int) -> None:
             "girl_name": girl_data["girl_name"],
         }
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
-        if download_usm_movie(movie_url, movie_file_name, movie_save_path):
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(REWARD_FOCUS_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 

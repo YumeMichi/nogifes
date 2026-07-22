@@ -11,7 +11,7 @@ from utils import (
 LIVE_FINISH_MOVIE_DATA_PATH = "data/live_finish_movie.json"
 
 
-def download_live_finish_movie() -> None:
+def download_live_finish_movie(*, force: bool = False) -> None:
     unit_girl_data = get_unit_girl_list()
     downloaded_movies = load_download_records(LIVE_FINISH_MOVIE_DATA_PATH, "movie_id")
     for unit in get_unit_list():
@@ -30,10 +30,10 @@ def download_live_finish_movie() -> None:
             "girl_name": girl_name,
         }
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
-        if download_usm_movie(movie_url, movie_file_name, movie_save_path):
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(LIVE_FINISH_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 

@@ -30,7 +30,7 @@ def _display_movie_name(raw_name: str) -> str:
     )
 
 
-def download_reward_movie() -> None:
+def download_reward_movie(*, force: bool = False) -> None:
     unit_girl_data = get_unit_girl_list()
     downloaded_movies = load_download_records(REWARD_MOVIE_DATA_PATH, "movie_id")
     for movie_data in get_reward_movie_list():
@@ -46,10 +46,10 @@ def download_reward_movie() -> None:
             "girl_name": girl_name,
         }
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
-        if download_usm_movie(movie_url, movie_file_name, movie_save_path):
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(REWARD_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 

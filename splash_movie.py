@@ -11,7 +11,7 @@ from utils import (
 SPLASH_MOVIE_DATA_PATH = "data/splash_movie.json"
 
 
-def download_splash_movie() -> None:
+def download_splash_movie(*, force: bool = False) -> None:
     downloaded_movies = load_download_records(SPLASH_MOVIE_DATA_PATH, "movie_id")
     for movie_data in get_splash_movie_list():
         if movie_data["splash_type"] == 2:
@@ -24,7 +24,7 @@ def download_splash_movie() -> None:
         movie_save_path = build_download_path("splash_movie", movie_save_name)
         movie = {"movie_id": movie_data["splash_id"], "movie_name": movie_name}
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
         if download_usm_movie(
@@ -32,6 +32,7 @@ def download_splash_movie() -> None:
             movie_file_name,
             movie_save_path,
             require_audio=True,
+            force=force,
         ):
             update_json_record(SPLASH_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie

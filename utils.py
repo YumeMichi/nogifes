@@ -289,10 +289,11 @@ def download_usm_movie(
     *,
     include_audio: bool = True,
     require_audio: bool = False,
+    force: bool = False,
 ) -> bool:
     """Download a USME file, remux its streams, and clean up on success."""
     destination = Path(output_path)
-    if destination.exists():
+    if destination.exists() and not force:
         return False
 
     archive_path = TEMP_DIR / archive_name
@@ -320,10 +321,12 @@ def download_usm_movie(
     print(f"Successfully extracted {destination.name}")
     return True
 
-def download_cpk_movie(url: str, archive_name: str, output_path: str | Path) -> bool:
+def download_cpk_movie(
+    url: str, archive_name: str, output_path: str | Path, *, force: bool = False
+) -> bool:
     """Download a CPK movie bundle, remux it, and clean up on success."""
     destination = Path(output_path)
-    if destination.exists():
+    if destination.exists() and not force:
         return False
 
     archive_path = TEMP_DIR / archive_name

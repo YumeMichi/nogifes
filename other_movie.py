@@ -13,7 +13,7 @@ from utils import (
 OTHER_MOVIE_DATA_PATH = "data/other_movie.json"
 
 
-def download_other_movie() -> None:
+def download_other_movie(*, force: bool = False) -> None:
     downloaded_movies = load_download_records(OTHER_MOVIE_DATA_PATH, "movie_id")
     for movie_data in get_other_movie_list():
         movie_id = movie_data["other_movie_id"]
@@ -38,12 +38,12 @@ def download_other_movie() -> None:
             "high_quality": movie_data["high_quality"],
         }
 
-        if not should_download_record(
+        if not force and not should_download_record(
             downloaded_movies, movie, "movie_id", quality_key="high_quality"
         ):
             continue
 
-        if download_cpk_movie(movie_url, movie_file_name, movie_save_path):
+        if download_cpk_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(OTHER_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 

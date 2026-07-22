@@ -11,7 +11,7 @@ from utils import (
 ADVENTURE_MOVIE_DATA_PATH = "data/adventure_movie.json"
 
 
-def download_adventure_movie() -> None:
+def download_adventure_movie(*, force: bool = False) -> None:
     downloaded_movies = load_download_records(ADVENTURE_MOVIE_DATA_PATH, "movie_id")
     for resource in get_resource_list():
         movie_file_name = resource["filename"]
@@ -24,10 +24,10 @@ def download_adventure_movie() -> None:
         movie_save_path = build_download_path("adventure_movie", movie_save_name)
         movie = {"movie_id": movie_id, "movie_name": movie_file_name[:-5]}
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
-        if download_usm_movie(movie_url, movie_file_name, movie_save_path):
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, force=force):
             update_json_record(ADVENTURE_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 

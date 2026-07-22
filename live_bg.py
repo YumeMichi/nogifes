@@ -13,7 +13,7 @@ LIVE_BG_RESOURCE_TYPE = (8, 33)
 LIVE_BG_DATA_PATH = "data/live_bg.json"
 
 
-def download_live_bg() -> None:
+def download_live_bg(*, force: bool = False) -> None:
     resources_by_background: dict[int, list[dict]] = {}
     downloaded_backgrounds = load_download_records(LIVE_BG_DATA_PATH, "live_bg_id")
     for resource in get_resource_list():
@@ -42,7 +42,7 @@ def download_live_bg() -> None:
                 "live_bg_has_high_quality": int(is_high_quality),
             }
 
-            if not should_download_record(
+            if not force and not should_download_record(
                 downloaded_backgrounds,
                 bg,
                 "live_bg_id",
@@ -50,7 +50,7 @@ def download_live_bg() -> None:
             ):
                 continue
 
-            if download_cpk_movie(bg_url, bg_file_name, bg_save_path):
+            if download_cpk_movie(bg_url, bg_file_name, bg_save_path, force=force):
                 update_json_record(LIVE_BG_DATA_PATH, bg, "live_bg_id")
                 downloaded_backgrounds[bg["live_bg_id"]] = bg
 

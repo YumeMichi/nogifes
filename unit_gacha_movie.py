@@ -11,7 +11,7 @@ from utils import (
 UNIT_GACHA_MOVIE_DATA_PATH = "data/unit_gacha_movie.json"
 
 
-def download_unit_gacha_movie() -> None:
+def download_unit_gacha_movie(*, force: bool = False) -> None:
     unit_girl_data = get_unit_girl_list()
     downloaded_movies = load_download_records(UNIT_GACHA_MOVIE_DATA_PATH, "movie_id")
     for unit in get_unit_list():
@@ -26,10 +26,10 @@ def download_unit_gacha_movie() -> None:
         movie_save_path = build_download_path("unit_gacha_movie", girl_name, movie_save_name)
         movie = {"movie_id": unit["unit_id"], "movie_name": movie_name, "girl_name": girl_name}
 
-        if not should_download_record(downloaded_movies, movie, "movie_id"):
+        if not force and not should_download_record(downloaded_movies, movie, "movie_id"):
             continue
 
-        if download_usm_movie(movie_url, movie_file_name, movie_save_path, include_audio=False):
+        if download_usm_movie(movie_url, movie_file_name, movie_save_path, include_audio=False, force=force):
             update_json_record(UNIT_GACHA_MOVIE_DATA_PATH, movie, "movie_id")
             downloaded_movies[movie["movie_id"]] = movie
 
