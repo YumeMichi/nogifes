@@ -1773,5 +1773,20 @@
         "live_bg_id": 90000871,
         "live_bg_name": "おひとりさま天国 -5th ALBUM MEMORIAL LIVE ver-",
         "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 460041,
+        "live_bg_name": "新宿バックオフ",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 480021,
+        "live_bg_name": "愛って羨ましい",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 90000881,
+        "live_bg_name": "好きになってみた -真夏の全国ツアー2025 ver-",
+        "live_bg_has_high_quality": 0
     }
 ]

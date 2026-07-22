@@ -60,7 +60,7 @@ function RijndaelDecryptECB($key, $cipherText)
 
 function GetMasterdataVersion()
 {
-    return 354;
+    return 355;
 }
 
 function GetConnectKey()
