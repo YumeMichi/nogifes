@@ -3,6 +3,7 @@ mstlist_version.txt
 
 downloads/
 temp/
+tests/
 
 __pycache__
 
