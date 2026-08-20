@@ -282,7 +282,7 @@
     {
         "live_bg_id": 110041,
         "live_bg_name": "僕がいる場所",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 110051,
@@ -607,7 +607,7 @@
     {
         "live_bg_id": 200121,
         "live_bg_name": "設定温度",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 210011,
@@ -1787,6 +1787,16 @@
     {
         "live_bg_id": 90000881,
         "live_bg_name": "好きになってみた -真夏の全国ツアー2025 ver-",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 420051,
+        "live_bg_name": "懐かない仔猫",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 470021,
+        "live_bg_name": "全力ラップタイム",
         "live_bg_has_high_quality": 0
     }
 ]

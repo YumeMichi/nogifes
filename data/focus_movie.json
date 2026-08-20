@@ -11572,5 +11572,59 @@
         "live_location": "大阪城ホール",
         "high_quality": 0,
         "girl_name": "瀬戸口心月"
+    },
+    {
+        "movie_id": 1293,
+        "movie_name": "ガールズルール",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 1,
+        "girl_name": "吉田綾乃クリスティー"
+    },
+    {
+        "movie_id": 1294,
+        "movie_name": "嫉妬の権利",
+        "live_name": "39thSGアンダーライブ",
+        "live_date": "2025年10月7日",
+        "live_location": "横浜BUNTAI",
+        "high_quality": 1,
+        "girl_name": "吉田綾乃クリスティー"
+    },
+    {
+        "movie_id": 1295,
+        "movie_name": "My rule",
+        "live_name": "39thSGアンダーライブ",
+        "live_date": "2025年10月7日",
+        "live_location": "横浜BUNTAI",
+        "high_quality": 1,
+        "girl_name": "吉田綾乃クリスティー"
+    },
+    {
+        "movie_id": 1296,
+        "movie_name": "三番目の風",
+        "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
+        "live_date": "2026年2月23日",
+        "live_location": "有明アリーナ",
+        "high_quality": 1,
+        "girl_name": "吉田綾乃クリスティー"
+    },
+    {
+        "movie_id": 1292,
+        "movie_name": "懐かない仔猫",
+        "live_name": "Coupling Collection 2022-2025",
+        "live_date": "2026年2月20日",
+        "live_location": "有明アリーナ",
+        "high_quality": 0,
+        "girl_name": "田村真佑"
+    },
+    {
+        "movie_id": 1297,
+        "movie_name": "おひとりさま天国",
+        "live_name": "真夏の全国ツアー2025",
+        "live_date": "2025年7月17日",
+        "live_location": "大阪城ホール",
+        "high_quality": 1,
+        "girl_name": "瀬戸口心月"
     }
 ]
