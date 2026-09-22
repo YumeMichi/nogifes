@@ -1062,7 +1062,7 @@
     {
         "live_bg_id": 370071,
         "live_bg_name": "17分間",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 380011,
@@ -1202,7 +1202,7 @@
     {
         "live_bg_id": 440041,
         "live_bg_name": "タイムリミット片想い",
-        "live_bg_has_high_quality": 0
+        "live_bg_has_high_quality": 1
     },
     {
         "live_bg_id": 450021,
@@ -1797,6 +1797,16 @@
     {
         "live_bg_id": 470021,
         "live_bg_name": "全力ラップタイム",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 410031,
+        "live_bg_name": "「じゃあね」が切ない",
+        "live_bg_has_high_quality": 0
+    },
+    {
+        "live_bg_id": 470041,
+        "live_bg_name": "Fake Doctor",
         "live_bg_has_high_quality": 0
     }
 ]

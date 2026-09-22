@@ -10706,7 +10706,7 @@
         "live_name": "11th YEAR BIRTHDAY LIVE ～5期生ライブ～",
         "live_date": "2023年2月23日",
         "live_location": "横浜アリーナ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "川﨑桜"
     },
     {
@@ -11444,7 +11444,7 @@
         "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
         "live_date": "2026年2月22日",
         "live_location": "有明アリーナ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "川﨑桜"
     },
     {
@@ -11471,7 +11471,7 @@
         "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
         "live_date": "2026年2月22日",
         "live_location": "有明アリーナ",
-        "high_quality": 0,
+        "high_quality": 1,
         "girl_name": "矢田萌華"
     },
     {
@@ -11626,5 +11626,23 @@
         "live_location": "大阪城ホール",
         "high_quality": 1,
         "girl_name": "瀬戸口心月"
+    },
+    {
+        "movie_id": 1298,
+        "movie_name": "「じゃあね」が切ない",
+        "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
+        "live_date": "2026年2月23日",
+        "live_location": "有明アリーナ",
+        "high_quality": 0,
+        "girl_name": "五百城茉央"
+    },
+    {
+        "movie_id": 1299,
+        "movie_name": "バンドエイド剥がすような別れ方",
+        "live_name": "5th ALBUM MEMORIAL LIVE 『My respect』",
+        "live_date": "2026年2月22日",
+        "live_location": "有明アリーナ",
+        "high_quality": 1,
+        "girl_name": "奥田いろは"
     }
 ]
